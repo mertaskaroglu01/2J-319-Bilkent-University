@@ -2,9 +2,9 @@ package UserInterface;
 
 import javax.swing.JPanel;
 
-public class SettingsPanel extends JPanel{
-
-	SettingsPanel() {
+public class HighScoresPanel {
+	
+	HighScoresPanel() {
 		
 	}
 	

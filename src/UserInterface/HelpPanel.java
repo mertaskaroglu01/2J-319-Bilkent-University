@@ -1,5 +1,10 @@
 package UserInterface;
 
-public class HelpPanel {
+import javax.swing.JPanel;
 
+public class HelpPanel extends JPanel{
+
+	HelpPanel() {
+		
+	}
 }

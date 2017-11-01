@@ -1,5 +1,11 @@
 package UserInterface;
 
-public class CreditsPanel {
+import javax.swing.JPanel;
 
+public class CreditsPanel extends JPanel{
+
+	CreditsPanel() {
+		
+	}
+	
 }
