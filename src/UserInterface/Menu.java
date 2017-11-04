@@ -34,7 +34,9 @@ public class Menu extends JFrame {
 	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(200,200);
 		setBounds(100, 100, 450, 300);
+		setTitle("Bubble Popper (version β)");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

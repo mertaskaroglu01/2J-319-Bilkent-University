@@ -3,7 +3,9 @@ package UserInterface;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -35,9 +37,13 @@ public class GameFrame extends JFrame {
 	 */
 	public GameFrame() {
 		
+		JLabel background = new JLabel (new ImageIcon ("/home/orkalp/git/2J-BubblePopper/background.png"));
 		gamePanel = new GamePanel();
+		gamePanel.add(background, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setTitle("Bubble Popper (version β)");
+        setSize(600, 385);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -45,13 +51,6 @@ public class GameFrame extends JFrame {
 		contentPane.add(gamePanel, BorderLayout.CENTER);
 
 		
-		/*JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		
-		txtMert = new JTextField();
-		txtMert.setText("Mert");
-		panel.add(txtMert);
-		txtMert.setColumns(10);*/
 		
 		
 	}

@@ -13,6 +13,7 @@ import GameManagement.GameManager;
 public class GamePanel extends JPanel {
 
 	GameManager gameManager;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -27,7 +28,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         try {
 			final BufferedImage image = ImageIO.read(new File("/home/orkalp/git/2J-BubblePopper/Paper_Ninja.png"));
-            g.drawImage(image, 0, 300, this);
+            g.drawImage(image, 400, 440, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
