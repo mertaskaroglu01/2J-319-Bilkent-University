@@ -7,11 +7,13 @@ public class Round {
 	ArrayList<Bubble> bubbles;
 	ArrayList<Mirror> mirrors;
 	ArrayList<Bullet> bullets;
-	Player player1;
+	public Player player1;
 	Player player2;
+	int roundNumber;
 	
-	Round() {
-		
+	public Round(int roundNumber) throws Exception {
+		this.roundNumber = roundNumber;
+		player1 = new Player(1);
 	}
 	
 	public void createBullet( int playerId) {

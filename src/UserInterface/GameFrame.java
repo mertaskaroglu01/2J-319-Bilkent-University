@@ -12,6 +12,7 @@ public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtMert;
+	public GamePanel gamePanel;
 
 	/**
 	 * Launch the application.
@@ -33,20 +34,24 @@ public class GameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GameFrame() {
+		
+		gamePanel = new GamePanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.add(gamePanel, BorderLayout.CENTER);
+
 		
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		
 		txtMert = new JTextField();
 		txtMert.setText("Mert");
 		panel.add(txtMert);
-		txtMert.setColumns(10);
+		txtMert.setColumns(10);*/
 		
 		
 	}

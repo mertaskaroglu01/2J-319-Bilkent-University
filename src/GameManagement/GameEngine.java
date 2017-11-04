@@ -1,13 +1,17 @@
 package GameManagement;
 
+import java.awt.image.BufferedImage;
+
+import GameEntities.*;
+
 public class GameEngine {
 	
-	//RoundManager round;
+	public Round round;
 	SoundManager soundManager;
-	private int lives;
+	public int lives;
 	
-	GameEngine() {
-		
+	GameEngine() throws Exception {
+		round = new Round(1);
 	}
 	
 	public void getRoundInfo() {
@@ -15,7 +19,7 @@ public class GameEngine {
 	}
 	
 	public void drawRound() {
-		
+	    
 	}
 	
 	public boolean bubblesLeft() {

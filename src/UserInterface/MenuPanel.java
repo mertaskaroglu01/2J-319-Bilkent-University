@@ -3,8 +3,11 @@ package UserInterface;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import GameManagement.*;
+import GameEntities.*;
 
 import java.awt.event.ActionListener;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 
 public class MenuPanel extends JPanel {
@@ -13,6 +16,8 @@ public class MenuPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	
 	public MenuPanel() {
 		this.setVisible(true);
 		JButton btnPlay = new JButton("Play");
@@ -21,9 +26,12 @@ public class MenuPanel extends JPanel {
 				gameFrame = new GameFrame();
 				gameFrame.setVisible(true);
 			}
+			
 		});
 		add(btnPlay);
 
 	}
+	
+	
 
 }
