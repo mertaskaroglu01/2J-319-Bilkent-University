@@ -1,32 +1,29 @@
 package UserInterface;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import GameManagement.GameManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuPanel extends JPanel {
+	
+	GameFrame gameFrame;
+	/**
+	 * Create the panel.
+	 */
+	public MenuPanel() {
+		this.setVisible(true);
+		JButton btnPlay = new JButton("Play");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gameFrame = new GameFrame();
+				gameFrame.setVisible(true);
+			}
+		});
+		add(btnPlay);
 
-	JButton play;
-	
-	MenuPanel() {
-		setLayout(null);
-        setLocation(0, 0);
-        setVisible(true);
-        
-        play = new JButton("Play");
-        play.setSize(300, 30);
-        play.setLocation(50, 360);
-        play.setHorizontalAlignment(SwingConstants.CENTER);
-        play.addMouseListener(Menu.MenuActionListener);
-        add(play);
 	}
-	
-	
-	
-	
+
 }

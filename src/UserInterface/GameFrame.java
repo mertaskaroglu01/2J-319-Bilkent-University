@@ -4,15 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 
-public class Menu extends JFrame {
+public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
-		
-	public MenuPanel menuPanel;
+	private JTextField txtMert;
+
 	/**
 	 * Launch the application.
 	 */
@@ -20,7 +20,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
+					GameFrame frame = new GameFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -40,9 +40,14 @@ public class Menu extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		menuPanel = new MenuPanel();
-		add( menuPanel);
-		menuPanel.setVisible(true);
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		
+		txtMert = new JTextField();
+		txtMert.setText("Mert");
+		panel.add(txtMert);
+		txtMert.setColumns(10);
+		
 		
 	}
 
