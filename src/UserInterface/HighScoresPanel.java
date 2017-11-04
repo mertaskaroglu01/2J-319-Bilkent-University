@@ -2,7 +2,7 @@ package UserInterface;
 
 import javax.swing.JPanel;
 
-public class HighScoresPanel {
+public class HighScoresPanel extends JPanel{
 	
 	HighScoresPanel() {
 		

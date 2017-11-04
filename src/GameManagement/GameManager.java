@@ -6,7 +6,7 @@ public class GameManager {
 	public GameEngine gameEngine;
 	
 	public GameManager() {
-		
+		this.gameEngine = gameEngine;
 	}
 	
 	public void gameLoop() {
