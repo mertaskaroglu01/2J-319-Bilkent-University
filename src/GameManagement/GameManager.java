@@ -5,8 +5,8 @@ public class GameManager {
 	private boolean paused;
 	public GameEngine gameEngine;
 	
-	public GameManager() {
-		this.gameEngine = gameEngine;
+	public GameManager() throws Exception {
+		this.gameEngine = new GameEngine();
 	}
 	
 	public void gameLoop() {

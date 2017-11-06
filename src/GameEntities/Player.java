@@ -20,7 +20,7 @@ public class Player extends GameObject {
 	
 	Player( int playerId) throws Exception {
 		
-		File imageFile = new File("/home/orkalp/git/2J-BubblePopper/Paper_Ninja.png");
+		File imageFile = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\Paper_Ninja.png");
         this.image = ImageIO.read(imageFile);
         
 		if( playerId == 1)

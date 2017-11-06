@@ -34,12 +34,13 @@ public class GameFrame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public GameFrame() {
+	public GameFrame() throws Exception {
 		
-		JLabel background = new JLabel (new ImageIcon ("/home/orkalp/git/2J-BubblePopper/background.png"));
+		//JLabel background = new JLabel (new ImageIcon ("C:\\Users\\Mert\\git\\2J-BubblePopper\\background.png"));
 		gamePanel = new GamePanel();
-		gamePanel.add(background, BorderLayout.CENTER);
+		//gamePanel.add(background, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("Bubble Popper (version β)");
