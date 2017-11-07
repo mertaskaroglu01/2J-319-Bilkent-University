@@ -14,7 +14,7 @@ public class Player extends GameObject {
 	
 	int weaponType;
 	public int pos;	
-	boolean isShooting;
+	public boolean isShooting;
 	int score;
     public final BufferedImage image;
 	
