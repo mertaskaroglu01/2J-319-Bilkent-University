@@ -1,10 +1,19 @@
 package GameEntities;
 
-public class BlueBubble extends Bubble {
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-	int point;
+import javax.imageio.ImageIO;
+
+public class BlueBubble extends Bubble {
 	
-	BlueBubble() {
-		
+	
+	
+	BlueBubble() throws IOException {
+		points = 20;
+		bubbleType = 1;
 	}
+	
+	  
 }

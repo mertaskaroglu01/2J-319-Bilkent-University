@@ -12,8 +12,9 @@ public class Bullet extends GameObject {
 	public Bullet(int xPos) throws IOException
 	{
 		x = xPos;
-		y = 250;
+		y = 270;
 		bulletImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\bullet.png"));
+		
 	}
 	
 	public BufferedImage getImage() {
@@ -23,5 +24,5 @@ public class Bullet extends GameObject {
 	public void moveUp() {
 		y = y - 2;
 	}
-
+	
 }

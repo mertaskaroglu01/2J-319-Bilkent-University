@@ -50,18 +50,21 @@ public class GamePanel extends JPanel   {
 	                if (e.getKeyCode() == KeyEvent.VK_W)
 	                {
 	                	System.out.println("Fire"); 
-	                	try {
-							gameManager.gameEngine.round.createBullet(1);
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}    
+	                	   
 	                	//gameManager.gameEngine.round.bullet1.changeXCoordinates( gameManager.gameEngine.round.player1.getXCoordinates() );
-	                	gameManager.gameEngine.round.player1.shoot();	                	
+	                	if( !gameManager.gameEngine.round.player1.isShooting() ) {
+	                		try {
+								gameManager.gameEngine.round.createBullet(1);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} 
+	                		gameManager.gameEngine.round.player1.shoot();	
+	                	}                	
 	                	//gameManager.gameEngine.round.player1.isShooting = false;
 	                	 
 	                }
-	                
+	               
 	            }
 	        });	
 	    setFocusable(true);
@@ -100,7 +103,7 @@ public class GamePanel extends JPanel   {
         	g.drawImage(gameManager.gameEngine.round.player1.getImage(), gameManager.gameEngine.round.player1.getXCoordinates(), gameManager.gameEngine.round.player1.getYCoordinates(), this);
         	if(gameManager.gameEngine.round.player1.isShooting() )
 			{				
-				if( gameManager.gameEngine.round.bullet1.getYCoordinates() > 20)
+				if( gameManager.gameEngine.round.bullet1.getYCoordinates() > 0)
 				{
 					g.drawImage(gameManager.gameEngine.round.bullet1.getImage(), gameManager.gameEngine.round.bullet1.getXCoordinates(),gameManager.gameEngine.round.bullet1.getYCoordinates(), this);
 					gameManager.gameEngine.round.bullet1.moveUp();			
@@ -109,11 +112,14 @@ public class GamePanel extends JPanel   {
 				else 
 				{
 					gameManager.gameEngine.round.player1.changeShootingState(false);
-					gameManager.gameEngine.round.bullet1.changeYCoordinates(290);
+					gameManager.gameEngine.round.bullet1.changeYCoordinates(380);
 				}
-				
+				 
 			}	
-        	
+        	for( int i = 0; i < gameManager.gameEngine.round.getNoOfBubbles(); i++ ) {
+        		g.drawImage(gameManager.gameEngine.round.getBubble(i).getImage(gameManager.gameEngine.round.getBubble(i).getBubbleType()), gameManager.gameEngine.round.getBubble(i).getXCoordinates(), gameManager.gameEngine.round.getBubble(i).getYCoordinates(), this);
+        	}
+        	  
         	repaint();
 			//gameManager.gameEngine.round.player1.pos += 50;
 			//System.out.println(gameManager.gameEngine.round.player1.pos);

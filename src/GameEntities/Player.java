@@ -22,7 +22,7 @@ public class Player extends GameObject {
 		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\Paper_Ninja.png");
         this.image = ImageIO.read(imageFile);
         
-        y = 215;
+        y = 255;
         
 		if( playerId == 1)
 			x = 300;
@@ -63,7 +63,7 @@ public class Player extends GameObject {
 		isShooting = temp;
 	}
 	public void changeWeaponType( int weaponId) {
-		
+		 
 	}
 	
 }

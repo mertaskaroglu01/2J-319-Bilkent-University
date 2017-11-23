@@ -19,29 +19,36 @@ public class Round {
 		//createCharacter(2);
 		//createBullet(1);
 		//createBullet(2);
+		bubbles = new ArrayList<Bubble>();
+		if( roundNumber == 1) {
+			createRedBubble();
+			createGreenBubble();
+			createBlueBubble();
+			createRedBubble();
+		}
 	}
 	
 	public void createBullet( int playerId) throws IOException{
 		if( playerId == 1)
 			bullet1 = new Bullet( player1.getXCoordinates() );
 		else if (playerId == 2)
-			bullet2 = new Bullet( player2.getXCoordinates() );
+			bullet2 = new Bullet( player2.getXCoordinates());
 	}
 	
 	public void removeBullet(Bullet bullet) {
 		
 	}
 	
-	public Bubble createRedBubble() {
-		
+	public void createRedBubble() throws IOException {
+		bubbles.add( new RedBubble() );
 	}
 	
-	public Bubble createGreenBubble() {
-		
+	public void createGreenBubble() throws IOException {
+		bubbles.add( new GreenBubble() );
 	}
 	
-	public Bubble createBlueBubble( ) {
-		
+	public void createBlueBubble( ) throws IOException {
+		bubbles.add( new BlueBubble() ); 
 	}
 	
 	public void popBubble( Bubble bubble) {
@@ -69,4 +76,12 @@ public class Round {
 		
 	}
 	
+	public int getNoOfBubbles() {
+		return bubbles.size();
+	}
+	
+	public Bubble getBubble( int index) {
+		return bubbles.get(index);
+	  
+	}
 }
