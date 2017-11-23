@@ -7,11 +7,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Bullet extends GameObject {
-	public final BufferedImage bullet1Image;
+	public final BufferedImage bulletImage;
 	
-	public Bullet() throws IOException
+	public Bullet(int xPos) throws IOException
 	{
-		 bullet1Image = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\bullet.png"));
+		x = xPos;
+		y = 250;
+		bulletImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\bullet.png"));
+	}
+	
+	public BufferedImage getImage() {
+		return bulletImage;
+	}
+	
+	public void moveUp() {
+		y = y - 2;
 	}
 
 }

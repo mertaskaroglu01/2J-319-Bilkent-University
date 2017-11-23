@@ -2,6 +2,7 @@ package UserInterface;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import GameManagement.*;
 import GameEntities.*;
@@ -23,7 +24,7 @@ public class MenuPanel extends JPanel {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				gameFrame = new GameFrame();
+			    gameFrame = new GameFrame();
 				gameFrame.setVisible(true);
 			}
 			
@@ -31,7 +32,5 @@ public class MenuPanel extends JPanel {
 		add(btnPlay);
 
 	}
-	
-	
 
 }

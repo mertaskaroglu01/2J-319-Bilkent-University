@@ -7,13 +7,11 @@ import GameEntities.*;
 public class GameEngine {
 	
 	public Round round;
-	public Bullet bullet;
 	SoundManager soundManager;
 	public int lives;
 	
 	GameEngine() throws Exception {
 		round = new Round(1);
-		bullet = new Bullet();
 	}
 	
 	public void getRoundInfo() {

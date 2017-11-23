@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.sun.javafx.tk.Toolkit;
+//import com.sun.javafx.tk.Toolkit;
 
 import GameManagement.GameManager;
 
@@ -28,12 +28,7 @@ public class GamePanel extends JPanel   {
 	 * Create the panel.
 	 * @throws Exception 
 	 */
-	int x;
-	int bulletY;
-	int bulletX;
 	public GamePanel() throws Exception {
-		 bulletY = 290;
-		 bulletX = 0;
 		 addKeyListener(new KeyAdapter() {
 
 	            @Override
@@ -41,25 +36,30 @@ public class GamePanel extends JPanel   {
 	            	if (e.getKeyCode() == KeyEvent.VK_A) {
 	                	int key = e.getKeyCode();	            		
 	            			System.out.println("Move Left");
-	            			gameManager.gameEngine.round.player1.pos -= 20;
+	            			gameManager.gameEngine.round.player1.goLeft();
 	            			repaint();            	
 	                   
 	                }
 	                if (e.getKeyCode() == KeyEvent.VK_D) {
 	                	int key = e.getKeyCode();	            		
 	            			System.out.println("Move Right");
-	            			gameManager.gameEngine.round.player1.pos += 20;
-	            			repaint();            	
+	            			gameManager.gameEngine.round.player1.goRight();
+	            			repaint();     			
 	                   
 	                }
-	                if (e.getKeyCode() == KeyEvent.VK_F)
+	                if (e.getKeyCode() == KeyEvent.VK_W)
 	                {
-	                	System.out.println("Fire");
-	                	gameManager.gameEngine.round.player1.isShooting = true;
-	                	bulletX = gameManager.gameEngine.round.player1.pos;
-	                	
+	                	System.out.println("Fire"); 
+	                	try {
+							gameManager.gameEngine.round.createBullet(1);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}    
+	                	//gameManager.gameEngine.round.bullet1.changeXCoordinates( gameManager.gameEngine.round.player1.getXCoordinates() );
+	                	gameManager.gameEngine.round.player1.shoot();	                	
 	                	//gameManager.gameEngine.round.player1.isShooting = false;
-	                	
+	                	 
 	                }
 	                
 	            }
@@ -67,7 +67,6 @@ public class GamePanel extends JPanel   {
 	    setFocusable(true);
 	    setFocusTraversalKeysEnabled(false);
 		this.gameManager = new GameManager();	
-		x = gameManager.gameEngine.round.player1.pos;
 		this.setVisible(true);
 	}
 //	@Override
@@ -90,27 +89,27 @@ public class GamePanel extends JPanel   {
 //			gameManager.gameEngine.round.player1.pos += 50;
 //			repaint();
 //		}
-//	}
+//	
 	
 	
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\background.png"));
-        	g.drawImage(background, 250, 70, this);			
-        	g.drawImage(gameManager.gameEngine.round.player1.image, gameManager.gameEngine.round.player1.pos, 290, this);
-        	if(gameManager.gameEngine.round.player1.isShooting == true )
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\background.png"));
+        	g.drawImage(background, 0, 0, this);			
+        	g.drawImage(gameManager.gameEngine.round.player1.getImage(), gameManager.gameEngine.round.player1.getXCoordinates(), gameManager.gameEngine.round.player1.getYCoordinates(), this);
+        	if(gameManager.gameEngine.round.player1.isShooting() )
 			{				
-				if(bulletY > 20)
+				if( gameManager.gameEngine.round.bullet1.getYCoordinates() > 20)
 				{
-					g.drawImage(gameManager.gameEngine.bullet.bullet1Image, bulletX,bulletY, this);
-					bulletY -= 2;				
-									
+					g.drawImage(gameManager.gameEngine.round.bullet1.getImage(), gameManager.gameEngine.round.bullet1.getXCoordinates(),gameManager.gameEngine.round.bullet1.getYCoordinates(), this);
+					gameManager.gameEngine.round.bullet1.moveUp();			
+			
 				}
 				else 
 				{
-					gameManager.gameEngine.round.player1.isShooting = false;
-					bulletY = 290;
+					gameManager.gameEngine.round.player1.changeShootingState(false);
+					gameManager.gameEngine.round.bullet1.changeYCoordinates(290);
 				}
 				
 			}	

@@ -13,27 +13,55 @@ import javax.imageio.ImageIO;
 public class Player extends GameObject {
 	
 	int weaponType;
-	public int pos;	
-	public boolean isShooting;
+	boolean isShooting;
 	int score;
-    public final BufferedImage image;
+    final BufferedImage image;
 	
 	Player( int playerId) throws Exception {
 		
-		File imageFile = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\Paper_Ninja.png");
+		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\Paper_Ninja.png");
         this.image = ImageIO.read(imageFile);
         
+        y = 215;
+        
 		if( playerId == 1)
-			pos = 300;
+			x = 300;
 		else if( playerId == 2 ) 
-			pos = 600;
+			x = 600;
 		
 		isShooting =  false;
 		score = 0;
 	}
 	
+	public void shoot() {
+		isShooting = true;
+	}
 	
+	public void goRight() {
+		if( x <481)
+			x = x + 20;
+		else  
+			x = 500;
+	}
 	
+	public void goLeft() {
+		if( x > 19 )
+			x = x -20;
+		else
+			x = 0;
+	}
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+	
+	public boolean isShooting() {
+		return isShooting;
+	}
+	
+	public void changeShootingState( boolean temp) {
+		isShooting = temp;
+	}
 	public void changeWeaponType( int weaponId) {
 		
 	}
