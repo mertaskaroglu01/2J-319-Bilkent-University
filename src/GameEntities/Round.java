@@ -22,9 +22,9 @@ public class Round {
 		bubbles = new ArrayList<Bubble>();
 		if( roundNumber == 1) {
 			createRedBubble();
-			createGreenBubble();
-			createBlueBubble();
-			createRedBubble();
+			//createGreenBubble();
+			//createBlueBubble();
+			//createRedBubble();
 		}
 	}
 	

@@ -18,12 +18,12 @@ public class Bubble extends GameObject {
 	 
 	public Bubble() throws IOException {
 		Random rand = new Random();
-		 
+		
 		x = rand.nextInt(500) + 1;
 		y = rand.nextInt(140) + 1;
-		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\BlueBubble.png"));
-		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\GreenBubble.png"));
-		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\RedBubble.png"));
+		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
+		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
+		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
 	}
 
 	public int getBubbleType() {

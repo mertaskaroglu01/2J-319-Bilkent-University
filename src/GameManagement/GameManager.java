@@ -1,5 +1,7 @@
 package GameManagement;
 
+import GameEntities.Round;
+
 public class GameManager {
 	
 	private boolean paused;
@@ -12,7 +14,7 @@ public class GameManager {
 	public void gameLoop() {
 		
 	}
-	
+
 	public boolean livesRemaining() {
 		return true;
 	}

@@ -41,7 +41,7 @@ public class GameFrame extends JFrame
 			}
 		});
 	}
-	   
+	
 	/**
 	 * Create the frame.
 	 * @throws Exception 

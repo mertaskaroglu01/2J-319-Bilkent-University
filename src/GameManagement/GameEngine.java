@@ -14,6 +14,10 @@ public class GameEngine {
 		round = new Round(1);
 	}
 	
+	public Round getCurrentRound() {
+		return round;
+	}
+	
 	public void getRoundInfo() {
 		
 	}
@@ -30,9 +34,6 @@ public class GameEngine {
 		return 0;
 	}
 	
-	public int getCurrentRound() {
-		return 0;
-	}
 	
 	public void updateP1Score(int score) {
 		

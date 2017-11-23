@@ -14,6 +14,6 @@ public class BlueBubble extends Bubble {
 		points = 20;
 		bubbleType = 1;
 	}
-	
+
 	  
 }

@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import GameEntities.Round;
+
 //import com.sun.javafx.tk.Toolkit;
 
 import GameManagement.GameManager;
@@ -36,14 +38,14 @@ public class GamePanel extends JPanel   {
 	            	if (e.getKeyCode() == KeyEvent.VK_A) {
 	                	int key = e.getKeyCode();	            		
 	            			System.out.println("Move Left");
-	            			gameManager.gameEngine.round.player1.goLeft();
+	            			getCurrentRound().player1.goLeft();
 	            			repaint();            	
 	                   
 	                }
 	                if (e.getKeyCode() == KeyEvent.VK_D) {
 	                	int key = e.getKeyCode();	            		
 	            			System.out.println("Move Right");
-	            			gameManager.gameEngine.round.player1.goRight();
+	            			getCurrentRound().player1.goRight();
 	            			repaint();     			
 	                   
 	                }
@@ -52,14 +54,14 @@ public class GamePanel extends JPanel   {
 	                	System.out.println("Fire"); 
 	                	   
 	                	//gameManager.gameEngine.round.bullet1.changeXCoordinates( gameManager.gameEngine.round.player1.getXCoordinates() );
-	                	if( !gameManager.gameEngine.round.player1.isShooting() ) {
+	                	if( !getCurrentRound().player1.isShooting() ) {
 	                		try {
-								gameManager.gameEngine.round.createBullet(1);
+	                			getCurrentRound().createBullet(1);
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} 
-	                		gameManager.gameEngine.round.player1.shoot();	
+	                		getCurrentRound().player1.shoot();	
 	                	}                	
 	                	//gameManager.gameEngine.round.player1.isShooting = false;
 	                	 
@@ -98,26 +100,26 @@ public class GamePanel extends JPanel   {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\background.png"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.png"));
         	g.drawImage(background, 0, 0, this);			
-        	g.drawImage(gameManager.gameEngine.round.player1.getImage(), gameManager.gameEngine.round.player1.getXCoordinates(), gameManager.gameEngine.round.player1.getYCoordinates(), this);
-        	if(gameManager.gameEngine.round.player1.isShooting() )
+        	g.drawImage(getCurrentRound().player1.getImage(), getCurrentRound().player1.getXCoordinates(), getCurrentRound().player1.getYCoordinates(), this);
+        	if(getCurrentRound().player1.isShooting() )
 			{				
-				if( gameManager.gameEngine.round.bullet1.getYCoordinates() > 0)
+				if( getCurrentRound().bullet1.getYCoordinates() > 0)
 				{
-					g.drawImage(gameManager.gameEngine.round.bullet1.getImage(), gameManager.gameEngine.round.bullet1.getXCoordinates(),gameManager.gameEngine.round.bullet1.getYCoordinates(), this);
-					gameManager.gameEngine.round.bullet1.moveUp();			
+					g.drawImage(getCurrentRound().bullet1.getImage(), getCurrentRound().bullet1.getXCoordinates(),getCurrentRound().bullet1.getYCoordinates(), this);
+					getCurrentRound().bullet1.moveUp();			
 			
 				}
 				else 
 				{
-					gameManager.gameEngine.round.player1.changeShootingState(false);
-					gameManager.gameEngine.round.bullet1.changeYCoordinates(380);
+					getCurrentRound().player1.changeShootingState(false);
+					getCurrentRound().bullet1.changeYCoordinates(380);
 				}
 				 
 			}	
-        	for( int i = 0; i < gameManager.gameEngine.round.getNoOfBubbles(); i++ ) {
-        		g.drawImage(gameManager.gameEngine.round.getBubble(i).getImage(gameManager.gameEngine.round.getBubble(i).getBubbleType()), gameManager.gameEngine.round.getBubble(i).getXCoordinates(), gameManager.gameEngine.round.getBubble(i).getYCoordinates(), this);
+        	for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
+        		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
         	}
         	  
         	repaint();
@@ -130,9 +132,13 @@ public class GamePanel extends JPanel   {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
        // if(gameManager.gameEngine.round.player1.image != null){
       //  }
     }
-
+	
+	public Round getCurrentRound() {
+		return gameManager.gameEngine.getCurrentRound();
+	}
 
 }

@@ -19,7 +19,7 @@ public class Player extends GameObject {
 	
 	Player( int playerId) throws Exception {
 		
-		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\Paper_Ninja.png");
+		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
         this.image = ImageIO.read(imageFile);
         
         y = 255;
@@ -38,10 +38,10 @@ public class Player extends GameObject {
 	}
 	
 	public void goRight() {
-		if( x <481)
+		if( x <535)
 			x = x + 20;
 		else  
-			x = 500;
+			x = 535;
 	}
 	
 	public void goLeft() {
