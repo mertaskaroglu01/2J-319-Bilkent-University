@@ -174,10 +174,10 @@ public class GamePanel extends JPanel implements KeyListener  {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			getCurrentEngine().handleBubbleWallCollision();
 			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
         		getCurrentRound().getBubble(i).move();
         	}
-			getCurrentEngine().handleBubbleWallCollision();
 		}
 		
 	}

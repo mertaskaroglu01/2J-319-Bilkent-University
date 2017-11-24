@@ -64,7 +64,65 @@ public class GameEngine {
 	}
 	
 	public void handleBubbleWallCollision() {
-		
+		for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
+			Bubble temp = round.getBubble(i);
+			if( temp.getXCoordinates() < 0) {
+				switch( temp.getDirection() ) {
+					case 5: temp.changeDirection(3);
+					break;
+					case 6: temp.changeDirection(2);
+					break;
+					case 7: temp.changeDirection(1);
+					break;
+					case 8: temp.changeDirection(12);
+					break;
+					case 9: temp.changeDirection(11);
+					break;
+				}
+			}
+			if( temp.getYCoordinates() < 0) {
+				switch( temp.getDirection() ) {
+					case 2: temp.changeDirection(12);
+					break;
+					case 3: temp.changeDirection(11);
+					break;
+					case 4: temp.changeDirection(10);
+					break;
+					case 5: temp.changeDirection(9);
+					break;
+					case 6: temp.changeDirection(8);
+					break;
+				}
+			}
+			if( temp.getXCoordinates() > 560) {
+				switch( temp.getDirection() ) {
+					case 3: temp.changeDirection(5);
+					break;
+					case 2: temp.changeDirection(6);
+					break;
+					case 1: temp.changeDirection(7);
+					break;
+					case 12: temp.changeDirection(8);
+					break;
+					case 11: temp.changeDirection(9);
+					break;
+				}
+			}
+			if( temp.getYCoordinates() > 290) {
+				switch( temp.getDirection() ) {
+					case 8: temp.changeDirection(6);
+					break;
+					case 9: temp.changeDirection(5);
+					break;
+					case 10: temp.changeDirection(4);
+					break;
+					case 11: temp.changeDirection(3);
+					break;
+					case 12: temp.changeDirection(2);
+					break;
+				}
+			}
+		}
 	}
 	
 	public void handleBubbleMirrorCollision() {

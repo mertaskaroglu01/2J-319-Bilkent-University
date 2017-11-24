@@ -48,9 +48,17 @@ public class Bubble extends GameObject {
 		
 	}
 	
+	public int getDirection() {
+		return movingDirection;
+	}
+	
+	public void changeDirection( int direction) {
+		movingDirection = direction;
+	}
+	
 	public void move() {
 		switch ( movingDirection) {
-			case 1: x = x + 14;
+			case 1: x = x + 15;
 				    break;
 			case 2: x = x + 10;
 					y = y -5;
@@ -58,7 +66,7 @@ public class Bubble extends GameObject {
 			case 3: x = x + 5;
 					y = y - 10;
 						break;
-			case 4: y = y -14;
+			case 4: y = y -15;
 						break;
 			case 5: x = x - 5;
 					y = y - 10;
@@ -66,7 +74,7 @@ public class Bubble extends GameObject {
 			case 6: x = x - 10;
 					y = y - 5;
 						break;
-			case 7: x = x - 14;
+			case 7: x = x - 15;
 						break;
 			case 8: x = x - 10;
 					y = y + 5;
@@ -74,7 +82,7 @@ public class Bubble extends GameObject {
 			case 9: x = x - 5;
 					y = y + 10;
 					break;
-			case 10:y = y + 14;
+			case 10:y = y + 15;
 					break;
 			case 11: x = x + 5;
 					y = y + 10;
