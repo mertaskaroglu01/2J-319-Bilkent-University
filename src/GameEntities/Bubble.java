@@ -15,6 +15,7 @@ public class Bubble extends GameObject {
 	int speed;
 	int points;
 	int bubbleType;
+	int movingDirection;
 	 
 	public Bubble() throws IOException {
 		Random rand = new Random();
@@ -24,6 +25,9 @@ public class Bubble extends GameObject {
 		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
 		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
 		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
+		
+		movingDirection = rand.nextInt(12) + 1;
+		
 	}
 
 	public int getBubbleType() {
@@ -42,6 +46,43 @@ public class Bubble extends GameObject {
 		else
 			return greenBubbleImage;
 		
+	}
+	
+	public void move() {
+		switch ( movingDirection) {
+			case 1: x = x + 14;
+				    break;
+			case 2: x = x + 10;
+					y = y -5;
+					break;
+			case 3: x = x + 5;
+					y = y - 10;
+						break;
+			case 4: y = y -14;
+						break;
+			case 5: x = x - 5;
+					y = y - 10;
+						break;
+			case 6: x = x - 10;
+					y = y - 5;
+						break;
+			case 7: x = x - 14;
+						break;
+			case 8: x = x - 10;
+					y = y + 5;
+					break;
+			case 9: x = x - 5;
+					y = y + 10;
+					break;
+			case 10:y = y + 14;
+					break;
+			case 11: x = x + 5;
+					y = y + 10;
+					break;
+			case 12: x = x + 10;
+					y = y + 5;
+					break;
+		}
 	}
 	   
 }

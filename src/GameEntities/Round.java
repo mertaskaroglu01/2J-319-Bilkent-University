@@ -16,15 +16,15 @@ public class Round {
 	public Round(int roundNumber) throws Exception {
 		this.roundNumber = roundNumber;
 		createCharacter(1);
-		//createCharacter(2);
+		createCharacter(2);
 		//createBullet(1);
 		//createBullet(2);
 		bubbles = new ArrayList<Bubble>();
 		if( roundNumber == 1) {
 			createRedBubble();
-			//createGreenBubble();
-			//createBlueBubble();
-			//createRedBubble();
+			createGreenBubble();
+			createBlueBubble();
+			createRedBubble();
 		}
 	}
 	
@@ -83,5 +83,23 @@ public class Round {
 	public Bubble getBubble( int index) {
 		return bubbles.get(index);
 	  
+	}
+	
+	public ArrayList<Bubble> getBubbles() {
+		return bubbles; 
+	}
+	
+	public Player getPlayer( int playerId) {
+		if( playerId == 1)
+			return player1;
+		else
+			return player2;
+	}
+	
+	public Bullet getBullet( int playerId) {
+		if( playerId == 1)
+			return bullet1;
+		else
+			return bullet2;
 	}
 }

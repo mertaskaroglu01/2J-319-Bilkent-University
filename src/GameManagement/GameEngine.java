@@ -6,9 +6,9 @@ import GameEntities.*;
 
 public class GameEngine {
 	
-	public Round round;
+	Round round;
 	SoundManager soundManager;
-	public int lives;
+	int lives;
 	
 	GameEngine() throws Exception {
 		round = new Round(1);
@@ -18,33 +18,45 @@ public class GameEngine {
 		return round;
 	}
 	
-	public void getRoundInfo() {
-		
-	}
-	
-	public void drawRound() {
-	    
-	}
-	
 	public boolean bubblesLeft() {
-		return true;
+		return( !(round.getBubbles().size() == 0));
 	}
 	
 	public int getRemainingLives() {
-		return 0;
+		return lives;
 	}
 	
 	
-	public void updateP1Score(int score) {
-		
+	public void updateScore(int playerId, int bubbleType) {
+		if(playerId == 1) {
+			if( bubbleType == 0)
+				round.getPlayer(1).updateScore(10);
+			else if( bubbleType == 1)
+				round.getPlayer(1).updateScore(20);
+			else
+				round.getPlayer(1).updateScore(50);
+		}
+		else {
+			if( bubbleType == 0)
+				round.getPlayer(2).updateScore(10);
+			else if( bubbleType == 1)
+				round.getPlayer(2).updateScore(20);
+			else
+				round.getPlayer(2).updateScore(50);
+		}
+			
 	}
 	
-	public void updateP2Score(int score) {
-		
+	public void updatePlayerLocations(int posP1, int posP2) {
+		round.getPlayer(1).changeXCoordinates(posP1);
+		round.getPlayer(2).changeXCoordinates(posP2);
 	}
 	
-	public void updatePlayerLocations(int posP1, int pusP2) {
-		
+	public int getPlayerLocation( int playerId) {
+		if( playerId == 1)
+			return round.getPlayer(1).getXCoordinates();
+		else
+			return round.getPlayer(2).getXCoordinates();
 	}
 	
 	public void handlePlayerBubbleCollision() {

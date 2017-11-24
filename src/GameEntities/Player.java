@@ -27,7 +27,7 @@ public class Player extends GameObject {
 		if( playerId == 1)
 			x = 300;
 		else if( playerId == 2 ) 
-			x = 600;
+			x = 350;
 		
 		isShooting =  false;
 		score = 0;
@@ -64,6 +64,10 @@ public class Player extends GameObject {
 	}
 	public void changeWeaponType( int weaponId) {
 		 
+	}
+	
+	public void updateScore( int x) {
+		score = score + x;
 	}
 	
 }
