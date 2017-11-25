@@ -94,7 +94,7 @@ public class GameEngine {
 					break;
 				}
 			}
-			if( temp.getXCoordinates() > 560) {
+			if( temp.getXCoordinates() > 1160) {
 				switch( temp.getDirection() ) {
 					case 3: temp.changeDirection(5);
 					break;
@@ -108,7 +108,7 @@ public class GameEngine {
 					break;
 				}
 			}
-			if( temp.getYCoordinates() > 290) {
+			if( temp.getYCoordinates() > 520) {
 				switch( temp.getDirection() ) {
 					case 8: temp.changeDirection(6);
 					break;
@@ -129,8 +129,30 @@ public class GameEngine {
 		
 	}
 	
-	public void handleBulletMirrorCollision() {
-		
+	public void handleBulletBubbleCollision() {
+		if( getCurrentRound().getBullet(1) != null && getCurrentRound().getBullet(2) != null) {
+			int b1xPos = getCurrentRound().getBullet(1).getXCoordinates();
+			int b1yPos = getCurrentRound().getBullet(1).getYCoordinates();
+			int b2xPos = getCurrentRound().getBullet(2).getXCoordinates();
+			int b2yPos = getCurrentRound().getBullet(2).getYCoordinates();
+			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) { 
+				Bubble temp = getCurrentRound().getBubble(i);
+				int xPos = temp.getXCoordinates();
+				int yPos = temp.getYCoordinates();
+				if( b1xPos > (xPos) && b1xPos < (xPos + 30) && b1yPos > (yPos) && b1yPos < (yPos + 30)) {
+					int type = temp.getBubbleType();
+					updateScore(1, type);
+					getCurrentRound().getBubbles().remove(i);
+					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
+				}
+				if( b2xPos > (xPos) && b2xPos < (xPos + 30) && b2yPos > (yPos) && b2yPos < (yPos + 30)) { 
+					int type = temp.getBubbleType();
+					updateScore(2, type);
+					getCurrentRound().getBubbles().remove(i);
+					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
+				}
+			}
+		}
 	}
 	
 	public void checkCollision() {

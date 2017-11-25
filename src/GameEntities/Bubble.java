@@ -20,8 +20,8 @@ public class Bubble extends GameObject {
 	public Bubble() throws IOException {
 		Random rand = new Random();
 		
-		x = rand.nextInt(500) + 1;
-		y = rand.nextInt(140) + 1;
+		x = rand.nextInt(1200) + 1;
+		y = rand.nextInt(300) + 1;
 		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
 		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
 		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
@@ -58,37 +58,37 @@ public class Bubble extends GameObject {
 	
 	public void move() {
 		switch ( movingDirection) {
-			case 1: x = x + 15;
+			case 1: x = x + 8;
 				    break;
-			case 2: x = x + 10;
-					y = y -5;
+			case 2: x = x + 6;
+					y = y -3;
 					break;
-			case 3: x = x + 5;
-					y = y - 10;
+			case 3: x = x + 3;
+					y = y - 6;
 						break;
-			case 4: y = y -15;
+			case 4: y = y -8;
 						break;
-			case 5: x = x - 5;
-					y = y - 10;
+			case 5: x = x - 3;
+					y = y - 6;
 						break;
-			case 6: x = x - 10;
-					y = y - 5;
+			case 6: x = x - 6;
+					y = y - 3;
 						break;
-			case 7: x = x - 15;
+			case 7: x = x - 8;
 						break;
-			case 8: x = x - 10;
-					y = y + 5;
+			case 8: x = x - 6;
+					y = y + 3;
 					break;
-			case 9: x = x - 5;
-					y = y + 10;
+			case 9: x = x - 3;
+					y = y + 6;
 					break;
-			case 10:y = y + 15;
+			case 10:y = y + 8;
 					break;
-			case 11: x = x + 5;
-					y = y + 10;
+			case 11: x = x + 3;
+					y = y + 6;
 					break;
-			case 12: x = x + 10;
-					y = y + 5;
+			case 12: x = x + 6;
+					y = y + 3;
 					break;
 		}
 	}

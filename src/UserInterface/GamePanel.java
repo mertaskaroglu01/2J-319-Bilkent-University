@@ -26,7 +26,8 @@ import GameManagement.GameManager;
 public class GamePanel extends JPanel implements KeyListener  {
 
 	GameManager gameManager;
-	private Timer timer = new Timer(100, new TimerListener());
+	private Timer timer = new Timer(50, new TimerListener());
+	int time;
 	
 	/**
 	 * Create the panel.
@@ -34,7 +35,8 @@ public class GamePanel extends JPanel implements KeyListener  {
 	 */
 	public GamePanel() throws Exception {
 		addKeyListener(this);
-
+		
+		time = 0;
 	    setFocusable(true);
 	    setFocusTraversalKeysEnabled(false);
 		this.gameManager = new GameManager();	
@@ -46,12 +48,12 @@ public class GamePanel extends JPanel implements KeyListener  {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.png"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.jpg"));
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
-        	g.drawImage(getCurrentRound().getPlayer(1).getImage(), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
+        	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
         	//Player2 draw
-        	g.drawImage(getCurrentRound().getPlayer(2).getImage(), getCurrentRound().getPlayer(2).getXCoordinates(), getCurrentRound().getPlayer(2).getYCoordinates(), this);
+        	g.drawImage(getCurrentRound().getPlayer(2).getImage(2), getCurrentRound().getPlayer(2).getXCoordinates(), getCurrentRound().getPlayer(2).getYCoordinates(), this);
         	//Plyaer1 bullet
         	if(getCurrentRound().getPlayer(1).isShooting() )
 			{				
@@ -174,10 +176,14 @@ public class GamePanel extends JPanel implements KeyListener  {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			getCurrentEngine().handleBubbleWallCollision();
-			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
-        		getCurrentRound().getBubble(i).move();
-        	}
+			time++;
+			if( time > 20) {
+				getCurrentEngine().handleBubbleWallCollision();
+				for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
+	        		getCurrentRound().getBubble(i).move();
+	        	}
+				getCurrentEngine().handleBulletBubbleCollision();
+			}
 		}
 		
 	}
