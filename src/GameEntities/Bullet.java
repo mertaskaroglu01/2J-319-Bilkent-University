@@ -13,7 +13,7 @@ public class Bullet extends GameObject {
 	{
 		x = xPos;
 		y = 480;
-		bulletImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\bullet.png"));
+		bulletImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\bullet.png"));
 		
 	}
 	

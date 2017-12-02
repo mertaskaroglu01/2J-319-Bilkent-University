@@ -11,9 +11,14 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import GameEntities.Round;
@@ -23,7 +28,7 @@ import GameManagement.GameEngine;
 
 import GameManagement.GameManager;
 
-public class GamePanel extends JPanel implements KeyListener  {
+public class GamePanel extends JPanel   {
 
 	GameManager gameManager;
 	private Timer timer = new Timer(50, new TimerListener());
@@ -34,8 +39,45 @@ public class GamePanel extends JPanel implements KeyListener  {
 	 * @throws Exception 
 	 */
 	public GamePanel() throws Exception {
-		addKeyListener(this);
-		
+		//addKeyListener(this);
+		addKeyBinding(this,KeyEvent.VK_A,"P1Left",(evt) -> {
+			getCurrentRound().getPlayer(1).goLeft();
+			repaint();
+		});
+		addKeyBinding(this,KeyEvent.VK_D,"P1Right",(evt) -> {
+			getCurrentRound().getPlayer(1).goRight();
+    		repaint();     
+		});
+		addKeyBinding(this,KeyEvent.VK_W,"P1Fire",(evt) -> {
+			if( !getCurrentRound().getPlayer(1).isShooting() ) {
+        		try {
+        			getCurrentRound().createBullet(1);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+        		getCurrentRound().getPlayer(1).shoot();	
+        	}                	
+		});
+		addKeyBinding(this,KeyEvent.VK_LEFT,"P2Left",(evt) -> {
+			getCurrentRound().getPlayer(2).goLeft();
+			repaint();
+		});
+		addKeyBinding(this,KeyEvent.VK_RIGHT,"P2Right",(evt) -> {
+			getCurrentRound().getPlayer(2).goRight();
+			repaint();
+		});
+		addKeyBinding(this,KeyEvent.VK_UP,"Fire",(evt) -> {
+			if( !getCurrentRound().getPlayer(2).isShooting() ) {
+        		try {
+        			getCurrentRound().createBullet(2);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+        		getCurrentRound().getPlayer(2).shoot();	
+        	}
+		});
 		time = 0;
 	    setFocusable(true);
 	    setFocusTraversalKeysEnabled(false);
@@ -48,7 +90,7 @@ public class GamePanel extends JPanel implements KeyListener  {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\background.jpg"));
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
         	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
@@ -113,7 +155,7 @@ public class GamePanel extends JPanel implements KeyListener  {
 	public GameEngine getCurrentEngine() {
 		return gameManager.gameEngine;
 	}
-	@Override
+	/*@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_A) {      
     		getCurrentRound().getPlayer(1).goLeft();
@@ -170,8 +212,21 @@ public class GamePanel extends JPanel implements KeyListener  {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}*/
+	@SuppressWarnings("serial")
+	public void addKeyBinding(JComponent comp,int keyCode, String id, ActionListener lambda)
+	{
+		InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW );
+		ActionMap ap = comp.getActionMap();
+		im.put(KeyStroke.getKeyStroke(keyCode,0,false),id);
+		ap.put(id, new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				lambda.actionPerformed(e);
+			}
+		});
 	}
-	
 	public class TimerListener implements ActionListener {
 
 		@Override

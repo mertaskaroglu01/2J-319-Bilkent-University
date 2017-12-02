@@ -25,6 +25,7 @@ public class GameFrame extends JFrame
 	private JPanel contentPane;
 	private JTextField txtMert;
 	public GamePanel gamePanel;
+	public MenuPanel menuPanel;
 
 	/**
 	 * Launch the application.
@@ -49,6 +50,7 @@ public class GameFrame extends JFrame
 	public GameFrame() throws Exception {
 		
 		//JLabel background = new JLabel (new ImageIcon ("C:\\Users\\Mert\\git\\2J-BubblePopper\\background.png"));
+		//menuPanel = new MenuPanel();
 		gamePanel = new GamePanel();
 		//gamePanel.add(background, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,10 +61,8 @@ public class GameFrame extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		setResizable(false);
-		   
-		contentPane.add(gamePanel, BorderLayout.CENTER);
-		
+		setResizable(false);		   
+		contentPane.add(gamePanel, BorderLayout.CENTER);	
 		
 		
 		
