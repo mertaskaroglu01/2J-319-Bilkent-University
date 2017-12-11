@@ -46,7 +46,9 @@ public class Round {
 		}
 		
 	}
-	
+	public int getRoundNumner() {
+		return roundNumber;
+	}
 	public void createBullet( int playerId) throws IOException{
 		if( playerId == 1)
 			bullet1 = new Bullet( player1.getXCoordinates() );

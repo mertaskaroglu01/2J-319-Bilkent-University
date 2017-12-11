@@ -6,18 +6,27 @@ import GameEntities.*;
 
 public class GameEngine {
 	
+	
+	Round rounds[];
 	Round round;
 	SoundManager soundManager;
 	int lives;
 	
 	GameEngine() throws Exception {
-		round = new Round(1);
+		rounds = new Round[4];		
+		rounds[0] = new Round(1);
+		rounds[1] = new Round(2);
+		rounds[2]= new Round(3);
+		setRound(0);
 	}
 	
 	public Round getCurrentRound() {
 		return round;
 	}
-	
+	public void setRound(int r)
+	{
+		round = rounds[r];
+	}
 	public boolean bubblesLeft() {
 		return( !(round.getBubbles().size() == 0));
 	}
@@ -59,7 +68,7 @@ public class GameEngine {
 			return round.getPlayer(2).getXCoordinates();
 	}
 	
-	public void handlePlayerBubbleCollision() {
+	public int handlePlayerBubbleCollision() {
 		if(getCurrentRound().getPlayer(1) != null && getCurrentRound().getPlayer(2) != null)
 		{
 			int p1xPos = getCurrentRound().getPlayer(1).getXCoordinates();
@@ -69,16 +78,26 @@ public class GameEngine {
 			for(int i = 0; i < getCurrentRound().getNoOfBubbles();i++)
 			{
 				Bubble checker = getCurrentRound().getBubble(i);
-				if((p1xPos + 30 > checker.getXCoordinates() && p1xPos - 30 < checker.getXCoordinates()) &&( p1yPos + 30 > checker.getXCoordinates() && p1yPos - 30 < checker.getXCoordinates()))
+				if((p1xPos < checker.getXCoordinates() && p1xPos + 30 > checker.getXCoordinates()) &&( p1yPos > checker.getYCoordinates() && p1yPos - 30 < checker.getYCoordinates()))
 				{
 					getCurrentRound().getPlayer(1).setLives(-1); 
+					System.out.println("Vuruldum");
+					if(getCurrentRound().getPlayer(1).getLives() <= 0)
+						return -1;
 				}
-				if((p2xPos + 30 > checker.getXCoordinates() && p2xPos - 30 < checker.getXCoordinates()) &&( p2yPos + 30 > checker.getXCoordinates() && p2yPos - 30 < checker.getXCoordinates()))
+				if((p2xPos  < checker.getXCoordinates() && p2xPos + 30 > checker.getXCoordinates()) &&( p2yPos  > checker.getYCoordinates() && p2yPos - 30 < checker.getYCoordinates()))
 				{
-					getCurrentRound().getPlayer(1).setLives(-1); 
+					getCurrentRound().getPlayer(2).setLives(-1);
+					System.out.println("Vuruldum");
+					if(getCurrentRound().getPlayer(2).getLives() <= 0)
+						return -1;
 				}
+				
 			}
+			
 		}
+		return 1;
+		//return false;
 	}
 	
 	public void handleBubbleWallCollision() {

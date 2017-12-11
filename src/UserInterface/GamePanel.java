@@ -33,6 +33,8 @@ public class GamePanel extends JPanel   {
 	GameManager gameManager;
 	private Timer timer = new Timer(50, new TimerListener());
 	int time;
+	JLabel p1Lives;
+	JLabel p2Lives;
 	
 	/**
 	 * Create the panel.
@@ -40,6 +42,10 @@ public class GamePanel extends JPanel   {
 	 */
 	public GamePanel() throws Exception {
 		//addKeyListener(this);
+		p1Lives = new JLabel("P1Lives = 5");
+		p2Lives = new JLabel("P2Lives = 5");
+		add(p1Lives);
+		add(p2Lives);
 		addKeyBinding(this,KeyEvent.VK_A,"P1Left",(evt) -> {
 			getCurrentRound().getPlayer(1).goLeft();
 			repaint();
@@ -128,9 +134,19 @@ public class GamePanel extends JPanel   {
 				}
 				 
 			}
+        	
+        	p1Lives.setText("Lives = " + getCurrentRound().getPlayer(1).getLives());
+        	p2Lives.setText("Lives = " + getCurrentRound().getPlayer(2).getLives());
         	//Bubbles
         	for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
         		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
+        	}
+        	if(getCurrentRound().getNoOfBubbles() == 0)
+        	{
+        		gameManager.gameEngine.setRound(getCurrentRound().getRoundNumner());
+        		for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
+            		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
+            	}
         	}
         	  
         	repaint();
@@ -238,6 +254,9 @@ public class GamePanel extends JPanel   {
 	        		getCurrentRound().getBubble(i).move();
 	        	}
 				getCurrentEngine().handleBulletBubbleCollision();
+				int end = getCurrentEngine().handlePlayerBubbleCollision();
+				if(end == -1)
+					timer.stop();
 			}
 		}
 		
