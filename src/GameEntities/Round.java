@@ -10,7 +10,7 @@ public class Round {
 	public Bullet bullet1;
 	public Bullet bullet2;
 	public Player player1;
-	Player player2;
+	public Player player2;
 	int roundNumber;
 	
 	public Round(int roundNumber) throws Exception {
@@ -21,11 +21,30 @@ public class Round {
 		//createBullet(2);
 		bubbles = new ArrayList<Bubble>();
 		if( roundNumber == 1) {
-			createRedBubble();
-			createGreenBubble();
-			createBlueBubble();
-			createRedBubble();
+			for(int i = 0; i < 2; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
 		}
+		if( roundNumber == 2) {
+			for(int i = 0; i < 3; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+		}
+		if( roundNumber == 3) {
+			for(int i = 0; i < 4; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+		}
+		
 	}
 	
 	public void createBullet( int playerId) throws IOException{

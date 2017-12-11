@@ -104,6 +104,7 @@ public class Menu extends JFrame {
         box.add(btnHighScores);
 		box.add(Box.createVerticalStrut(10));
         box.add(btnSettings);
+        
         buttonPane.add(box);
 		contentPane.add(buttonPane,BorderLayout.CENTER);
 		contentPane.setBackground(Color.BLACK);

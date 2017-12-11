@@ -60,7 +60,25 @@ public class GameEngine {
 	}
 	
 	public void handlePlayerBubbleCollision() {
-		
+		if(getCurrentRound().getPlayer(1) != null && getCurrentRound().getPlayer(2) != null)
+		{
+			int p1xPos = getCurrentRound().getPlayer(1).getXCoordinates();
+			int p1yPos = getCurrentRound().getPlayer(1).getYCoordinates();
+			int p2xPos = getCurrentRound().getPlayer(2).getXCoordinates();
+			int p2yPos = getCurrentRound().getPlayer(2).getYCoordinates();
+			for(int i = 0; i < getCurrentRound().getNoOfBubbles();i++)
+			{
+				Bubble checker = getCurrentRound().getBubble(i);
+				if((p1xPos + 30 > checker.getXCoordinates() && p1xPos - 30 < checker.getXCoordinates()) &&( p1yPos + 30 > checker.getXCoordinates() && p1yPos - 30 < checker.getXCoordinates()))
+				{
+					getCurrentRound().getPlayer(1).setLives(-1); 
+				}
+				if((p2xPos + 30 > checker.getXCoordinates() && p2xPos - 30 < checker.getXCoordinates()) &&( p2yPos + 30 > checker.getXCoordinates() && p2yPos - 30 < checker.getXCoordinates()))
+				{
+					getCurrentRound().getPlayer(1).setLives(-1); 
+				}
+			}
+		}
 	}
 	
 	public void handleBubbleWallCollision() {
@@ -128,6 +146,7 @@ public class GameEngine {
 	public void handleBubbleMirrorCollision() {
 		
 	}
+	
 	
 	public void handleBulletBubbleCollision() {
 		if( getCurrentRound().getBullet(1) != null && getCurrentRound().getBullet(2) != null) {
