@@ -84,19 +84,22 @@ public class GameEngine {
 					System.out.println("Vuruldum");
 					if(getCurrentRound().getPlayer(1).getLives() <= 0)
 						return -1;
+					return 1;
 				}
 				if((p2xPos  < checker.getXCoordinates() && p2xPos + 30 > checker.getXCoordinates()) &&( p2yPos  > checker.getYCoordinates() && p2yPos - 30 < checker.getYCoordinates()))
 				{
 					getCurrentRound().getPlayer(2).setLives(-1);
 					System.out.println("Vuruldum");
+						
 					if(getCurrentRound().getPlayer(2).getLives() <= 0)
 						return -1;
+					return 1;
 				}
 				
 			}
 			
 		}
-		return 1;
+		return 0;
 		//return false;
 	}
 	

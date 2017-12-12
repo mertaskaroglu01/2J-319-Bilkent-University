@@ -35,7 +35,8 @@ public class GamePanel extends JPanel   {
 	int time;
 	JLabel p1Lives;
 	JLabel p2Lives;
-	
+	JLabel p1Scores;
+	JLabel p2Scores;
 	/**
 	 * Create the panel.
 	 * @throws Exception 
@@ -44,8 +45,12 @@ public class GamePanel extends JPanel   {
 		//addKeyListener(this);
 		p1Lives = new JLabel("P1Lives = 5");
 		p2Lives = new JLabel("P2Lives = 5");
+		p1Scores = new JLabel();
+		p2Scores = new JLabel();
 		add(p1Lives);
 		add(p2Lives);
+		add(p1Scores);
+		add(p2Scores);
 		addKeyBinding(this,KeyEvent.VK_A,"P1Left",(evt) -> {
 			getCurrentRound().getPlayer(1).goLeft();
 			repaint();
@@ -74,15 +79,19 @@ public class GamePanel extends JPanel   {
 			repaint();
 		});
 		addKeyBinding(this,KeyEvent.VK_UP,"Fire",(evt) -> {
-			if( !getCurrentRound().getPlayer(2).isShooting() ) {
-        		try {
-        			getCurrentRound().createBullet(2);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-        		getCurrentRound().getPlayer(2).shoot();	
-        	}
+				if( !getCurrentRound().getPlayer(2).isShooting() ) {
+	        		try {
+	        			getCurrentRound().createBullet(2);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+	        		getCurrentRound().getPlayer(2).shoot();	
+	        	}
+			
+			
+			
+			
 		});
 		time = 0;
 	    setFocusable(true);
@@ -107,8 +116,8 @@ public class GamePanel extends JPanel   {
 			{				
 				if( getCurrentRound().getBullet(1).getYCoordinates() > 0)
 				{
-					g.drawImage(getCurrentRound().getBullet(1).getImage(), getCurrentRound().getBullet(1).getXCoordinates(),getCurrentRound().getBullet(1).getYCoordinates(), this);
-					getCurrentRound().getBullet(1).moveUp();			
+					g.drawImage(getCurrentRound().getBullet(1).getImage(getCurrentRound().getPlayer(1).getWeaponType()), getCurrentRound().getBullet(1).getXCoordinates(),getCurrentRound().getBullet(1).getYCoordinates(), this);
+					getCurrentRound().getBullet(1).moveUp(getCurrentRound().getPlayer(1).getWeaponType());			
 			
 				}
 				else 
@@ -123,8 +132,8 @@ public class GamePanel extends JPanel   {
 			{				
 				if( getCurrentRound().getBullet(2).getYCoordinates() > 0)
 				{
-					g.drawImage(getCurrentRound().getBullet(2).getImage(), getCurrentRound().getBullet(2).getXCoordinates(),getCurrentRound().getBullet(2).getYCoordinates(), this);
-					getCurrentRound().getBullet(2).moveUp();			
+					g.drawImage(getCurrentRound().getBullet(2).getImage(getCurrentRound().getPlayer(2).getWeaponType()), getCurrentRound().getBullet(2).getXCoordinates(),getCurrentRound().getBullet(2).getYCoordinates(), this);
+					getCurrentRound().getBullet(2).moveUp(getCurrentRound().getPlayer(2).getWeaponType());			
 			
 				}
 				else 
@@ -134,9 +143,16 @@ public class GamePanel extends JPanel   {
 				}
 				 
 			}
-        	
-        	p1Lives.setText("Lives = " + getCurrentRound().getPlayer(1).getLives());
-        	p2Lives.setText("Lives = " + getCurrentRound().getPlayer(2).getLives());
+        	// Lives and Scores
+        	p1Lives.setText("P1 Lives = " + getCurrentRound().getPlayer(1).getLives());
+        	p2Lives.setText("P2 Lives = " + getCurrentRound().getPlayer(2).getLives());
+        	p1Scores.setText("P1 Scores = " + getCurrentRound().getPlayer(1).getScore());
+        	p2Scores.setText("P2 Scores = " + getCurrentRound().getPlayer(2).getScore());
+        	//Weapon Change
+        	if(getCurrentRound().getPlayer(2).getScore() > 10)
+        		getCurrentRound().getPlayer(2).changeWeaponType(1);
+        	if(getCurrentRound().getPlayer(1).getScore() > 10)
+        		getCurrentRound().getPlayer(1).changeWeaponType(1);
         	//Bubbles
         	for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
         		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
@@ -248,7 +264,7 @@ public class GamePanel extends JPanel   {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			time++;
-			if( time > 20) {
+			if( time > 0) {
 				getCurrentEngine().handleBubbleWallCollision();
 				for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
 	        		getCurrentRound().getBubble(i).move();
@@ -257,6 +273,8 @@ public class GamePanel extends JPanel   {
 				int end = getCurrentEngine().handlePlayerBubbleCollision();
 				if(end == -1)
 					timer.stop();
+				
+					
 			}
 		}
 		

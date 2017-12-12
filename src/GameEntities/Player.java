@@ -21,6 +21,7 @@ public class Player extends GameObject {
 	
 	Player( int playerId) throws Exception {
 		lives = 5;
+		weaponType = 0;
 		File imageFile = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
         this.image1 = ImageIO.read(imageFile);
         File imageFile2 = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
@@ -70,9 +71,11 @@ public class Player extends GameObject {
 		isShooting = temp;
 	}
 	public void changeWeaponType( int weaponId) {
-		 
+		 weaponType = weaponId;
 	}
-	
+	public int getWeaponType() {
+		return weaponType;
+	}
 	public void updateScore( int x) {
 		score = score + x;
 	}
