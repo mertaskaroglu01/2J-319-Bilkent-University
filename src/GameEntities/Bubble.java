@@ -22,12 +22,14 @@ public class Bubble extends GameObject {
 		
 		x = rand.nextInt(1200) + 1;
 		y = rand.nextInt(300) + 1;
-		blueBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
-		greenBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
-		redBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
+		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
+		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
+		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
 		
 		movingDirection = rand.nextInt(12) + 1;
 		
+		width = 30;
+		height = 30;
 	}
 
 	public int getBubbleType() {
@@ -92,6 +94,7 @@ public class Bubble extends GameObject {
 					break;
 		}
 	}
+	
 	   
 }
     

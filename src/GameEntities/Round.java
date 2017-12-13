@@ -49,11 +49,11 @@ public class Round {
 	public int getRoundNumner() {
 		return roundNumber;
 	}
-	public void createBullet( int playerId) throws IOException{
+	public void createBullet( int playerId, int bulletType) throws IOException{
 		if( playerId == 1)
-			bullet1 = new Bullet( player1.getXCoordinates() );
+			bullet1 = new Bullet( player1.getXCoordinates(), bulletType );
 		else if (playerId == 2)
-			bullet2 = new Bullet( player2.getXCoordinates());
+			bullet2 = new Bullet( player2.getXCoordinates(), bulletType);
 	}
 	
 	public void removeBullet(Bullet bullet) {

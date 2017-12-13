@@ -22,9 +22,9 @@ public class Player extends GameObject {
 	Player( int playerId) throws Exception {
 		lives = 5;
 		weaponType = 0;
-		File imageFile = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
+		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
         this.image1 = ImageIO.read(imageFile);
-        File imageFile2 = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
+        File imageFile2 = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
         this.image2 = ImageIO.read(imageFile2);
         
         y = 480;
@@ -36,6 +36,8 @@ public class Player extends GameObject {
 		
 		isShooting =  false;
 		score = 0;
+		width = 63;
+		height = 73;
 	}
 	
 	public void shoot() {

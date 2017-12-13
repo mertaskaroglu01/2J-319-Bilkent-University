@@ -54,7 +54,7 @@ public class GameFrame extends JFrame
 		gamePanel = new GamePanel();
 		//gamePanel.add(background, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 200, 450, 300);   
+		setBounds(400, 200, 600, 450);   
 		setTitle("Bubble Popper (version ?)");
         setSize(1220, 640);   
 		contentPane = new JPanel();

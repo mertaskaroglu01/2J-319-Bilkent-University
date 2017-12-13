@@ -1,22 +1,35 @@
 package GameEntities;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class GameObject {
 	
 	int x;
 	int y;
+	int width;
+	int height;
 	
+	/*
 	public void drawObject( Graphics g, int posX, int posY) {
 		
 	}
+	*/
 	
 	public int getWidth() {
-		return 0;
+		return width;
 	}
 	
 	public int getHeight() {
-		return 0;
+		return height;
+	}
+	
+	public void changeWidhth( int w) {
+		width = w;
+	}
+	
+	public void changeHeight( int h) {
+		height = h;
 	}
 	
 	public int getXCoordinates() {
@@ -27,11 +40,15 @@ public class GameObject {
 		return y;
 	}
 	
-	public void changeXCoordinates( int x) {
-		x = this.x;
+	public void changeXCoordinates( int xPos) {
+		x = xPos;
 	}
-	public void changeYCoordinates( int y) {
-		y = this.y;
+	public void changeYCoordinates( int yPos) {
+		y = yPos;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle( x, y, width, height);
 	}
 	
 }

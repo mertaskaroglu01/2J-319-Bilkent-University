@@ -1,8 +1,14 @@
 package GameManagement;
 
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.Timer;
+
 import GameEntities.*;
+import UserInterface.GamePanel.TimerListener;
 
 public class GameEngine {
 	
@@ -11,6 +17,8 @@ public class GameEngine {
 	Round round;
 	SoundManager soundManager;
 	int lives;
+	int p1Time, p2Time;
+	private Timer timer = new Timer(50, new TimerListener());
 	
 	GameEngine() throws Exception {
 		rounds = new Round[4];		
@@ -18,6 +26,9 @@ public class GameEngine {
 		rounds[1] = new Round(2);
 		rounds[2]= new Round(3);
 		setRound(0);
+		p1Time = 0;
+		p2Time = 0;
+		timer.start();
 	}
 	
 	public Round getCurrentRound() {
@@ -69,6 +80,7 @@ public class GameEngine {
 	}
 	
 	public int handlePlayerBubbleCollision() {
+		/*
 		if(getCurrentRound().getPlayer(1) != null && getCurrentRound().getPlayer(2) != null)
 		{
 			int p1xPos = getCurrentRound().getPlayer(1).getXCoordinates();
@@ -98,6 +110,31 @@ public class GameEngine {
 				
 			}
 			
+		}
+		*/
+		
+		Rectangle p1Rect = getCurrentRound().getPlayer(1).getBounds();
+		Rectangle p2Rect = getCurrentRound().getPlayer(2).getBounds();
+		
+		for(int i = 0; i < getCurrentRound().getNoOfBubbles();i++)
+		{
+			Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
+			if( bubbleRect.intersects(p1Rect) && p1Time > 40) {
+				getCurrentRound().getPlayer(1).setLives(-1); 
+				System.out.println("P1 Shot");
+				p1Time = 0;
+				if(getCurrentRound().getPlayer(1).getLives() <= 0)
+					return -1;
+				return 1;
+			}
+			if( bubbleRect.intersects(p2Rect) && p2Time > 40) {
+				getCurrentRound().getPlayer(2).setLives(-1);
+				System.out.println("P2 Shot");
+				p2Time = 0;
+				if(getCurrentRound().getPlayer(2).getLives() <= 0)
+					return -1;
+				return 1;
+			}
 		}
 		return 0;
 		//return false;
@@ -171,6 +208,7 @@ public class GameEngine {
 	
 	
 	public void handleBulletBubbleCollision() {
+		/*
 		if( getCurrentRound().getBullet(1) != null && getCurrentRound().getBullet(2) != null) {
 			int b1xPos = getCurrentRound().getBullet(1).getXCoordinates();
 			int b1yPos = getCurrentRound().getBullet(1).getYCoordinates();
@@ -194,6 +232,36 @@ public class GameEngine {
 				}
 			}
 		}
+		*/
+		if( getCurrentRound().getBullet(1) != null) {
+			Rectangle b1Rect = getCurrentRound().getBullet(1).getBounds(); 
+			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) { 
+				Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
+				if( b1Rect.intersects(bubbleRect)) {
+					int type = getCurrentRound().getBubble(i).getBubbleType();
+					updateScore(1, type);
+					getCurrentRound().getBubbles().remove(i);
+					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
+				}
+				
+			}
+		}
+		if( getCurrentRound().getBullet(2) != null) {
+
+			Rectangle b2Rect = getCurrentRound().getBullet(2).getBounds();
+			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
+				Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
+				if( b2Rect.intersects(bubbleRect)) {
+					int type = getCurrentRound().getBubble(i).getBubbleType();
+					updateScore(2, type);
+					getCurrentRound().getBubbles().remove(i);
+					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
+				}
+			}
+		}
+		
+	//sssssssssssssss
+	
 	}
 	
 	public void checkCollision() {
@@ -203,5 +271,13 @@ public class GameEngine {
 	public void changeRound() {
 		
 	}
-	
+	public class TimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			p1Time++;
+			p2Time++;
+		}
+		
+	}
 }

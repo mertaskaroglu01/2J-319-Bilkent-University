@@ -62,7 +62,7 @@ public class GamePanel extends JPanel   {
 		addKeyBinding(this,KeyEvent.VK_W,"P1Fire",(evt) -> {
 			if( !getCurrentRound().getPlayer(1).isShooting() ) {
         		try {
-        			getCurrentRound().createBullet(1);
+        			getCurrentRound().createBullet(1,  getCurrentRound().getPlayer(1).getWeaponType());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -81,7 +81,7 @@ public class GamePanel extends JPanel   {
 		addKeyBinding(this,KeyEvent.VK_UP,"Fire",(evt) -> {
 				if( !getCurrentRound().getPlayer(2).isShooting() ) {
 	        		try {
-	        			getCurrentRound().createBullet(2);
+	        			getCurrentRound().createBullet(2, getCurrentRound().getPlayer(2).getWeaponType());
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -105,7 +105,7 @@ public class GamePanel extends JPanel   {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\background.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.jpg"));
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
         	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
@@ -117,13 +117,13 @@ public class GamePanel extends JPanel   {
 				if( getCurrentRound().getBullet(1).getYCoordinates() > 0)
 				{
 					g.drawImage(getCurrentRound().getBullet(1).getImage(getCurrentRound().getPlayer(1).getWeaponType()), getCurrentRound().getBullet(1).getXCoordinates(),getCurrentRound().getBullet(1).getYCoordinates(), this);
-					getCurrentRound().getBullet(1).moveUp(getCurrentRound().getPlayer(1).getWeaponType());			
+					getCurrentRound().getBullet(1).moveUp();			
 			
 				}
 				else 
 				{
 					getCurrentRound().getPlayer(1).changeShootingState(false);
-					getCurrentRound().getPlayer(1).changeYCoordinates(380);
+					//getCurrentRound().getPlayer(1).changeYCoordinates(380);
 				}
 				 
 			}
@@ -133,13 +133,13 @@ public class GamePanel extends JPanel   {
 				if( getCurrentRound().getBullet(2).getYCoordinates() > 0)
 				{
 					g.drawImage(getCurrentRound().getBullet(2).getImage(getCurrentRound().getPlayer(2).getWeaponType()), getCurrentRound().getBullet(2).getXCoordinates(),getCurrentRound().getBullet(2).getYCoordinates(), this);
-					getCurrentRound().getBullet(2).moveUp(getCurrentRound().getPlayer(2).getWeaponType());			
+					getCurrentRound().getBullet(2).moveUp();			
 			
 				}
 				else 
 				{
 					getCurrentRound().getPlayer(2).changeShootingState(false);
-					getCurrentRound().getPlayer(2).changeYCoordinates(380);
+					//getCurrentRound().getPlayer(2).changeYCoordinates(380);
 				}
 				 
 			}
