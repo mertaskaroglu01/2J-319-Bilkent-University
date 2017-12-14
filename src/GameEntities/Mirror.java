@@ -2,12 +2,18 @@ package GameEntities;
 
 public class Mirror extends GameObject {
 	
-	int midX;
-	int midY;
-	int length;
+	int direction;
 	
-	Mirror() {
+	Mirror( int xPos, int yPos, int length, int d) {
+		height = 5;
+		width  = length;
+		x = xPos;
+		y = yPos;
 		
+		direction = d;
 	}
 	
+	public int getDirection() {
+		return direction;
+	}
 }

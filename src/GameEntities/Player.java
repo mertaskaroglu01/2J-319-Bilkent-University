@@ -17,7 +17,7 @@ public class Player extends GameObject {
 	int score;
 	int lives;
     final BufferedImage image1, image2;
-    //int velX;
+    int vel;
 	
 	Player( int playerId) throws Exception {
 		lives = 5;
@@ -85,19 +85,26 @@ public class Player extends GameObject {
 	public int getScore() {
 		return score;
 	}
+	
+	public void upgrade() {
+		if( score > 100) {
+			changeWeaponType( 2);
+		}
+	}
+	
 	public int getLives() {
 		return lives;
 	}
 	public void setLives(int change) {
 		lives = lives + change;
 	}
-	/*
-	public void setVelX( int velX) {
-		this.velX = velX;
+	
+	public void setVel( int vel) {
+		this.vel = vel;
 	}
 	
-	public int getVelX() {
-		return velX;
+	public int getVel() {
+		return vel;
 	}
-	*/
+	
 }

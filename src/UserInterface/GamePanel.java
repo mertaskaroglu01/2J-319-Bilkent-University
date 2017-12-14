@@ -15,6 +15,7 @@ import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,32 +32,34 @@ import GameManagement.GameManager;
 public class GamePanel extends JPanel   {
 
 	GameManager gameManager;
-	private Timer timer = new Timer(50, new TimerListener());
+	private Timer timer = new Timer(17, new TimerListener());
 	int time;
-	JLabel p1Lives;
-	JLabel p2Lives;
+	JLabel lives;
 	JLabel p1Scores;
 	JLabel p2Scores;
+	JButton nextLevel;
+
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
 	public GamePanel() throws Exception {
 		//addKeyListener(this);
-		p1Lives = new JLabel("P1Lives = 5");
-		p2Lives = new JLabel("P2Lives = 5");
+		lives = new JLabel("Lives = 5");
 		p1Scores = new JLabel();
 		p2Scores = new JLabel();
-		add(p1Lives);
-		add(p2Lives);
+		nextLevel = new JButton();
+		add(lives);
 		add(p1Scores);
 		add(p2Scores);
 		addKeyBinding(this,KeyEvent.VK_A,"P1Left",(evt) -> {
 			getCurrentRound().getPlayer(1).goLeft();
+			//getCurrentRound().getPlayer(1).setVel(-10);
 			repaint();
 		});
 		addKeyBinding(this,KeyEvent.VK_D,"P1Right",(evt) -> {
 			getCurrentRound().getPlayer(1).goRight();
+			//getCurrentRound().getPlayer(1).setVel(10);
     		repaint();     
 		});
 		addKeyBinding(this,KeyEvent.VK_W,"P1Fire",(evt) -> {
@@ -96,7 +99,7 @@ public class GamePanel extends JPanel   {
 		time = 0;
 	    setFocusable(true);
 	    setFocusTraversalKeysEnabled(false);
-		this.gameManager = new GameManager();	
+	    this.gameManager = new GameManager();	
 		this.setVisible(true);
 		timer.start();
 	}
@@ -144,19 +147,21 @@ public class GamePanel extends JPanel   {
 				 
 			}
         	// Lives and Scores
-        	p1Lives.setText("P1 Lives = " + getCurrentRound().getPlayer(1).getLives());
-        	p2Lives.setText("P2 Lives = " + getCurrentRound().getPlayer(2).getLives());
+        	lives.setText("Lives = " + getCurrentRound().getLives());
         	p1Scores.setText("P1 Scores = " + getCurrentRound().getPlayer(1).getScore());
         	p2Scores.setText("P2 Scores = " + getCurrentRound().getPlayer(2).getScore());
         	//Weapon Change
+        	/*
         	if(getCurrentRound().getPlayer(2).getScore() > 10)
         		getCurrentRound().getPlayer(2).changeWeaponType(1);
         	if(getCurrentRound().getPlayer(1).getScore() > 10)
         		getCurrentRound().getPlayer(1).changeWeaponType(1);
+        	*/
         	//Bubbles
         	for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
         		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
         	}
+        	/*
         	if(getCurrentRound().getNoOfBubbles() == 0)
         	{
         		gameManager.gameEngine.setRound(getCurrentRound().getRoundNumner());
@@ -164,6 +169,7 @@ public class GamePanel extends JPanel   {
             		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
             	}
         	}
+        	*/
         	  
         	repaint();
 			//gameManager.gameEngine.round.player1.pos += 50;
@@ -187,6 +193,11 @@ public class GamePanel extends JPanel   {
 	public GameEngine getCurrentEngine() {
 		return gameManager.gameEngine;
 	}
+	
+	public GameManager getGameManager() {
+		return gameManager;
+	}
+	
 	/*@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_A) {      
@@ -269,12 +280,10 @@ public class GamePanel extends JPanel   {
 				for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
 	        		getCurrentRound().getBubble(i).move();
 	        	}
-				getCurrentEngine().handleBulletBubbleCollision();
-				int end = getCurrentEngine().handlePlayerBubbleCollision();
-				if(end == -1)
-					timer.stop();
-				
-					
+				getCurrentEngine().handleCollisions();
+				if(gameManager.isRoundEnd()) {
+					add( nextLevel);
+				}
 			}
 		}
 		

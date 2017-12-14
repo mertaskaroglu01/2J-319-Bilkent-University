@@ -11,6 +11,7 @@ public class Round {
 	public Bullet bullet2;
 	public Player player1;
 	public Player player2;
+	int lives;
 	int roundNumber;
 	
 	public Round(int roundNumber) throws Exception {
@@ -46,9 +47,18 @@ public class Round {
 		}
 		
 	}
-	public int getRoundNumner() {
+	
+	public int getRoundNumber() {
 		return roundNumber;
 	}
+	
+	/*
+	public void changeRound() {
+		roundNumber++;
+	}
+	*/
+	
+	
 	public void createBullet( int playerId, int bulletType) throws IOException{
 		if( playerId == 1)
 			bullet1 = new Bullet( player1.getXCoordinates(), bulletType );
@@ -85,14 +95,6 @@ public class Round {
 		
 	}
 	
-	public void reflectBubble( Bubble bubble, Mirror mirror) {
-		
-	}
-	
-	public void reflectBubble( Bubble bubble) {
-		
-	}
-	
 	public void updateWeapon( Player player) {
 		
 	}
@@ -123,4 +125,17 @@ public class Round {
 		else
 			return bullet2;
 	}
+	
+	public int getLives() {
+		return lives;
+	}
+	
+	public void addLives() {
+		lives = lives + 3;
+	}
+	
+	public void removeLives() {
+		lives--;
+	}
+	
 }

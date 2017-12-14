@@ -79,7 +79,7 @@ public class GameEngine {
 			return round.getPlayer(2).getXCoordinates();
 	}
 	
-	public int handlePlayerBubbleCollision() {
+	public void handlePlayerBubbleCollision() {
 		/*
 		if(getCurrentRound().getPlayer(1) != null && getCurrentRound().getPlayer(2) != null)
 		{
@@ -119,24 +119,28 @@ public class GameEngine {
 		for(int i = 0; i < getCurrentRound().getNoOfBubbles();i++)
 		{
 			Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
-			if( bubbleRect.intersects(p1Rect) && p1Time > 40) {
+			if( bubbleRect.intersects(p1Rect) && p1Time > 80) {
 				getCurrentRound().getPlayer(1).setLives(-1); 
 				System.out.println("P1 Shot");
 				p1Time = 0;
+				/*
 				if(getCurrentRound().getPlayer(1).getLives() <= 0)
 					return -1;
 				return 1;
+				*/
 			}
-			if( bubbleRect.intersects(p2Rect) && p2Time > 40) {
+			if( bubbleRect.intersects(p2Rect) && p2Time > 80) {
 				getCurrentRound().getPlayer(2).setLives(-1);
 				System.out.println("P2 Shot");
 				p2Time = 0;
+				/*
 				if(getCurrentRound().getPlayer(2).getLives() <= 0)
 					return -1;
 				return 1;
+				*/
 			}
 		}
-		return 0;
+		//return 0;
 		//return false;
 	}
 	
@@ -264,13 +268,17 @@ public class GameEngine {
 	
 	}
 	
-	public void checkCollision() {
-		
+	public void handleCollisions() {
+		handleBulletBubbleCollision();
+		handleBubbleWallCollision();
+		handlePlayerBubbleCollision();
+		handleBubbleMirrorCollision();
 	}
 	
-	public void changeRound() {
-		
+	public void changeRound( int rNumber) throws Exception {
+		round = new Round( rNumber);
 	}
+	
 	public class TimerListener implements ActionListener {
 
 		@Override

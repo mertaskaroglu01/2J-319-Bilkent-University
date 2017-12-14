@@ -4,6 +4,7 @@ import GameEntities.Round;
 
 public class GameManager {
 	
+	private final int MAX_ROUND_NUMBER = 10;
 	private boolean paused;
 	public GameEngine gameEngine;
 	
@@ -16,17 +17,25 @@ public class GameManager {
 	}
 
 	public boolean livesRemaining() {
-		return true;
+		return gameEngine.getCurrentRound().getLives() == 0;
 	}
 	
-	public boolean endRound() {
-		return true;
+	public void endRound() {
+		
 	}
 	
-	public void startGame() {
+	public void startNewRound() throws Exception {
+		gameEngine.getCurrentRound().getPlayer(1).upgrade();
+		gameEngine.getCurrentRound().getPlayer(2).upgrade();
+		int rNumber = gameEngine.getCurrentRound().getRoundNumber();
+		gameEngine.changeRound( rNumber);
 	}
 	
 	public void resumeGame() {
+		
+	}
+	
+	public void pauseGame() {
 		
 	}
 	
@@ -34,8 +43,12 @@ public class GameManager {
 		return true;
 	}
 	
-	public void isGameEnd() {
-		
+	public boolean isRoundEnd() {
+		return gameEngine.getCurrentRound().getNoOfBubbles() == 0 && !isGameEnd();
+	}
+	
+	public boolean isGameEnd() {
+		return !livesRemaining() || gameEngine.getCurrentRound().getRoundNumber() != MAX_ROUND_NUMBER;
 	}
 	
 }
