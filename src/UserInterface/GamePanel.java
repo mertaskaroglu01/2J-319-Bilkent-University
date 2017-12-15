@@ -282,11 +282,14 @@ public class GamePanel extends JPanel   {
 	        	}
 				getCurrentEngine().handleCollisions();
 				if(gameManager.isRoundEnd()) {
-					add( nextLevel);
+					Menu.showInterPanel();
 				}
+				
 			}
+			repaint();
 		}
 		
 	}
+	
 
 }

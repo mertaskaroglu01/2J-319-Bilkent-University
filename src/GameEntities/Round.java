@@ -22,11 +22,11 @@ public class Round {
 		//createBullet(2);
 		bubbles = new ArrayList<Bubble>();
 		if( roundNumber == 1) {
-			for(int i = 0; i < 2; i++)
+			for(int i = 0; i < 1; i++)
 			{
 				createRedBubble();
-				createGreenBubble();
-				createBlueBubble();
+				//createGreenBubble();
+				//createBlueBubble();
 			}
 		}
 		if( roundNumber == 2) {

@@ -13,8 +13,8 @@ import java.awt.event.ActionEvent;
 
 public class MenuPanel extends JPanel {
 	
-	GamePanel gamePanel;
-	String menuOption;
+	JButton btnPlay;
+	JButton btnCredits;
 	//CreditPanel creditPanel;
 	/**
 	 * Create the panel.
@@ -23,12 +23,12 @@ public class MenuPanel extends JPanel {
 	
 	public MenuPanel() {
 		this.setVisible(true);
-		
+		btnPlay =  new JButton("Play");
+		btnCredits = new JButton("Credits");
+		this.add(btnPlay);
+		this.add(btnCredits);
 	}
-	public String getOption()
-	{
-		return menuOption;
-	}
+	
 	
 
 }

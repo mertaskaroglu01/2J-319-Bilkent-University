@@ -44,7 +44,13 @@ public class GameManager {
 	}
 	
 	public boolean isRoundEnd() {
-		return gameEngine.getCurrentRound().getNoOfBubbles() == 0 && !isGameEnd();
+		if(gameEngine.getCurrentRound().getNoOfBubbles() == 0 ) {
+			System.out.println("round end");
+			return (true);
+			
+		}
+		else
+			return false;
 	}
 	
 	public boolean isGameEnd() {
