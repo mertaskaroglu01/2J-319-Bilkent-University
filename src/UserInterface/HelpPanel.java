@@ -10,9 +10,6 @@ public class HelpPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public HelpPanel() {
-
-
-		
 		setVisible(true);
 		btnHelpBack = new JButton("Back to Main Menu");
 		add(btnHelpBack);

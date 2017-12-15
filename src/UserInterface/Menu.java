@@ -27,14 +27,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import UserInterface.GamePanel.TimerListener;
 
 public class Menu {
 	JFrame menuFrame; 
 
-	private JPanel contentPane;
-	private JPanel buttonPane;
-	private JLabel header;
 	//public MenuPanel menuPanel;
 	public GamePanel gamePanel;
 	public InterPanel interPanel;
@@ -45,7 +45,7 @@ public class Menu {
 	public SettingsPanel settingsPanel;
 	
 	CardLayout card;
-	
+	private Timer timer = new Timer(17, new TimerListener());
 	static boolean alert;
 	/**
 	 * Launch the application.
@@ -58,6 +58,8 @@ public class Menu {
 	 * @throws Exception 
 	 */
 	public Menu() throws Exception {
+			
+		alert = false;
 		
 		menuFrame = new JFrame("Menu");
 		
@@ -67,7 +69,7 @@ public class Menu {
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuFrame.setSize(12200, 6400);  
 		menuFrame.setBounds(400, 200, 450, 300);	
-		menuFrame.setTitle("Bubble Popper (version β)");
+		menuFrame.setTitle("Bubble Popper");
 		
 		gamePanel = new GamePanel();
 		menuPanel = new MenuPanel();
@@ -90,113 +92,18 @@ public class Menu {
 		
 		card.show(cardPanel, "menu");
 		
+		timer.start();
+		
 		menuPanel.btnPlay.addActionListener(new ButtonListener());
 		menuPanel.btnCredits.addActionListener(new ButtonListener());
-		menuPanel.btnPlay.addActionListener(new ButtonListener());
-	
-		/*
-		alert = false
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Font font = new Font("Arial", Font.BOLD, 18);
-		header = new JLabel("Bubble Trouble");
-		headr.setFont(new Font("Arial", Font.BOLD, 65));
-		header.setBackground(Color.WHITE);
-		header.setForeground(Color.white);
-		setSize(12200, 6400);  
-		setBounds(400, 200, 450, 300);	
-		setTitle("Bubble Popper (version β)");
-		Box box = Box.createVerticalBox();
-	    buttonPane = new JPanel();
-		
-		buttonPane2 = new JPanel();
-		buttonPane2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		buttonPane2.setLayout(new GridLayout(6,1));
-		buttonPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		buttonPane.setLayout(new FlowLayout(6,6,6));
-		buttonPane.setBackground(new Color(0,0,0));
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(100,200));
-		setContentPane(contentPane);
-		setResizable(true); 
-		JButton btnPlay = new JButton("        Play     ");
-		btnPlay.setFont(font);
-		btnPlay.setForeground(Color.CYAN);
-		btnPlay.setBackground(Color.BLACK);
-		JButton btnCredits = new JButton("     Credits  ");
-		btnCredits.setFont(font);
-		btnCredits.setForeground(Color.CYAN);
-		btnCredits.setBackground(Color.BLACK);
-		JButton btnHighScores = new JButton(" Highscore");
-		btnHighScores.setFont(font);
-		btnHighScores.setForeground(Color.CYAN);
-		btnHighScores.setBackground(Color.BLACK);
-		JButton btnSettings = new JButton("   Settings  ");
-		btnSettings.setFont(font);
-		btnSettings.setForeground(Color.CYAN);
-		btnSettings.setBackground(Color.BLACK);
-		box.add(Box.createHorizontalStrut(30));
-		box.add(header);
-		box.add(Box.createVerticalStrut(30));
-		box.add(btnPlay);
-		box.add(Box.createVerticalStrut(10));
-        box.add(btnCredits);
-        box.add(Box.createVerticalStrut(10));
-        box.add(btnHighScores);
-		box.add(Box.createVerticalStrut(10));
-        box.add(btnSettings);
-        
-        buttonPane.add(box);
-		contentPane.add(buttonPane,BorderLayout.CENTER);
-		contentPane.setBackground(Color.BLACK);
-		buttonPane.setBackground(Color.BLACK);
-		gamePanel = new GamePanel();
-		interPanel = new InterPanel();
-		btnPlay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			    try {			    	
-				    contentPane.removeAll();
-			        contentPane.invalidate();			    	
-					contentPane.add(gamePanel);
-					contentPane.revalidate();				
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		});
-		
-		if( alert == true) {
-			System.out.println("alerted");
-			try {			    	
-			    contentPane.removeAll()
-		        contentPane.invalidate();			    	
-				contentPane.add(interPanel);
-				contentPane.revalidate();				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		*/
+		menuPanel.btnSettings.addActionListener(new ButtonListener());
+		menuPanel.btnHelp.addActionListener(new ButtonListener());
+		creditsPanel.btnCreditsBack.addActionListener(new ButtonListener());
+		settingsPanel.btnSettingsBack.addActionListener(new ButtonListener());
+		helpPanel.btnHelpBack.addActionListener(new ButtonListener());
+		interPanel.btnProceed.addActionListener(new ButtonListener());
 		
 	}
-	
-	 public void paint( Graphics g ) { 
-		    super.paint(g);
-		    BufferedImage background;
-		/*	try {
-				//background = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\background.jpg"));
-				//g.drawImage(background, 0, 0, this);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-        		
-		  }
-	 
 	 
 	 public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {
@@ -210,9 +117,9 @@ public class Menu {
 				}
 			});
 		}
+	 	
 	 
-	 
-	 public static void showInterPanel() {
+	 public static void endOfRound() {
 		 alert = true;        
 	 }
 	 
@@ -232,13 +139,35 @@ public class Menu {
 		     else if( selectedButton == creditsPanel.btnCreditsBack) {
 		    	 card.show(cardPanel, "menu");
 		     }
-		     else if( selectedButton == creditsPanel.btnHelpBack) {
+		     else if( selectedButton == helpPanel.btnHelpBack) {
 		    	 card.show(cardPanel, "menu");
 		     }
-		     else if( selectedButton == creditsPanel.btnSettingsBack) {
+		     else if( selectedButton == settingsPanel.btnSettingsBack) {
 		    	 card.show(cardPanel, "menu");
+		     }
+		     else if( selectedButton == menuPanel.btnSettings) {
+			    	card.show(cardPanel, "settings");
+			 }
+		     else if( selectedButton == menuPanel.btnHelp) {
+			    	card.show(cardPanel, "help");
+			 }
+		     else if( selectedButton == interPanel.btnProceed) {
+		    	 card.show(cardPanel, "game");
 		     }
 		 }
 	 }
+	 
+	 public class TimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(alert) {
+				card.show(cardPanel, "inter");
+				alert = false;
+			}
+				
+		}
+	
+	}
 	 
 }

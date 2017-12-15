@@ -8,32 +8,14 @@ import javax.swing.JPanel;
 
 public class InterPanel extends JPanel {
 	
-	JButton btnNextRound;
-	boolean proceed;
+	JButton btnProceed;
 	/**
 	 * Create the panel.
 	 */
 	public InterPanel() {
 		this.setVisible(true);
-		btnNextRound = new JButton("       Proceed Next Round     ");
-		proceed = false;
-		btnNextRound.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			    try {			    	
-				    proceed = true;		
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		});
-		
-	}
-
-
-	public boolean getProceed() {
-		return proceed;
+		btnProceed = new JButton("Proceed Next Round");
+		this.add(btnProceed);
 	}
 	
 	

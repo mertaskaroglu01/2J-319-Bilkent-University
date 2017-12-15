@@ -38,12 +38,14 @@ public class GamePanel extends JPanel   {
 	JLabel p1Scores;
 	JLabel p2Scores;
 	JButton nextLevel;
+	boolean paused;
 
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
 	public GamePanel() throws Exception {
+		paused  = false;
 		//addKeyListener(this);
 		lives = new JLabel("Lives = 5");
 		p1Scores = new JLabel();
@@ -90,11 +92,17 @@ public class GamePanel extends JPanel   {
 						e1.printStackTrace();
 					} 
 	        		getCurrentRound().getPlayer(2).shoot();	
-	        	}
-			
-			
-			
-			
+	        	}		
+		});
+		addKeyBinding(this,KeyEvent.VK_P,"Pause",(evt) -> {
+			if( !paused) {
+				timer.stop();
+				paused = true;
+			}
+			else {
+				timer.start();
+				paused = false;
+			}
 		});
 		time = 0;
 	    setFocusable(true);
@@ -171,8 +179,8 @@ public class GamePanel extends JPanel   {
         	}
         	*/
         	  
-        	repaint();
-			//gameManager.gameEngine.round.player1.pos += 50;
+        	//repaint();
+			//gameManager.gameEngine.round.player1.pos += 50
 			//System.out.println(gameManager.gameEngine.round.player1.pos);
 			
             
@@ -282,7 +290,7 @@ public class GamePanel extends JPanel   {
 	        	}
 				getCurrentEngine().handleCollisions();
 				if(gameManager.isRoundEnd()) {
-					Menu.showInterPanel();
+					Menu.endOfRound();
 				}
 				
 			}

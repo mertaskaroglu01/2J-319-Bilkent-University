@@ -14,7 +14,7 @@ public class CreditsPanel extends JPanel {
 	 */
 	public CreditsPanel() {
 		setVisible(true);
-		txt1 = new JLabel("haha");
+		txt1 = new JLabel("bla bla");
 		add(txt1);
 		btnCreditsBack = new JButton("Back to Main Menu");
 		add(btnCreditsBack);
