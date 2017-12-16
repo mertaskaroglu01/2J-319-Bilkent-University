@@ -38,15 +38,17 @@ public class GamePanel extends JPanel   {
 	JLabel p1Scores;
 	JLabel p2Scores;
 	JButton nextLevel;
-	boolean paused, alerted;
+	boolean paused, alerted, startNext, startTimer;
 
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
 	public GamePanel() throws Exception {
+		startTimer = false;
 		alerted = false;
 		paused  = false;
+		startNext = false;
 		//addKeyListener(this);
 		lives = new JLabel("Lives = 5");
 		p1Scores = new JLabel();
@@ -203,8 +205,13 @@ public class GamePanel extends JPanel   {
 		return gameManager.gameEngine;
 	}
 	
-	public GameManager getGameManager() {
+	public GameManager getCurrentManager() {
 		return gameManager;
+	}
+	
+	
+	public void startNext() {
+		startNext = true;
 	}
 	
 	/*@Override
@@ -284,7 +291,7 @@ public class GamePanel extends JPanel   {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			time++;
-			if( time > 0) {
+			if( time > 0 && startTimer) {
 				getCurrentEngine().handleBubbleWallCollision();
 				for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
 	        		getCurrentRound().getBubble(i).move();
@@ -293,12 +300,39 @@ public class GamePanel extends JPanel   {
 				if(gameManager.isRoundEnd() && !alerted) {
 					Menu.endOfRound();
 					alerted = true;
+					getCurrentRound().getPlayer(1).changeShootingState(false);
+					getCurrentRound().getPlayer(2).changeShootingState(false);
+				}
+				if( startNext) {
+					try {
+						gameManager.startNewRound();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch blocks
+						e1.printStackTrace();
+					}
+					startNext = false;
+					alerted = false;
 				}
 				
 			}
 			repaint();
 		}
 		
+	}
+	
+	public void startTimer() {
+		startTimer = true;
+	}
+	
+	public void stopTimer() {
+		startTimer = false;
+	}
+	
+	public void changeAlertState() {
+		if(!alerted)
+			alerted = true;
+		else
+			alerted = false;
 	}
 	
 

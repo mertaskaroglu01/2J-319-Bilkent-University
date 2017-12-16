@@ -21,24 +21,24 @@ public class Bullet extends GameObject {
 		bulletType = bType;
 		
 		width = 15;
-		if( bulletType == 0)
-			height = 15;
 		if( bulletType == 1)
+			height = 15;
+		if( bulletType == 2)
 			height = 30;
 	}
 	
 	public BufferedImage getImage(int bulletType) {
-		if(bulletType == 0)
+		if(bulletType == 1)
 			return bulletImage;
-		else if(bulletType == 1)
+		else if(bulletType == 2)
 			return rocketImage; 
 		return null;
 	}
 	
 	public void moveUp() {
-		if(bulletType == 0)
-		y = y - 15;
 		if(bulletType == 1)
+		y = y - 15;
+		if(bulletType == 2)
 		y = y - 25;	
 	}
 	

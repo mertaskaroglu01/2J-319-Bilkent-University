@@ -11,21 +11,15 @@ import GameEntities.*;
 import UserInterface.GamePanel.TimerListener;
 
 public class GameEngine {
-	
-	
-	Round rounds[];
+
 	Round round;
 	SoundManager soundManager;
 	int lives;
 	int p1Time, p2Time;
-	private Timer timer = new Timer(50, new TimerListener());
+	private Timer timer = new Timer(17, new TimerListener());
 	
-	GameEngine() throws Exception {
-		rounds = new Round[4];		
-		rounds[0] = new Round(1);
-		rounds[1] = new Round(2);
-		rounds[2]= new Round(3);
-		setRound(0);
+	GameEngine() throws Exception {	
+		round = new Round();
 		p1Time = 0;
 		p2Time = 0;
 		timer.start();
@@ -34,10 +28,7 @@ public class GameEngine {
 	public Round getCurrentRound() {
 		return round;
 	}
-	public void setRound(int r)
-	{
-		round = rounds[r];
-	}
+	
 	public boolean bubblesLeft() {
 		return( !(round.getBubbles().size() == 0));
 	}
@@ -93,7 +84,7 @@ public class GameEngine {
 				if((p1xPos < checker.getXCoordinates() && p1xPos + 30 > checker.getXCoordinates()) &&( p1yPos > checker.getYCoordinates() && p1yPos - 30 < checker.getYCoordinates()))
 				{
 					getCurrentRound().getPlayer(1).setLives(-1); 
-					System.out.println("Vuruldum");
+					System.out.println("Vurldum");
 					if(getCurrentRound().getPlayer(1).getLives() <= 0)
 						return -1;
 					return 1;
@@ -120,7 +111,7 @@ public class GameEngine {
 		{
 			Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
 			if( bubbleRect.intersects(p1Rect) && p1Time > 80) {
-				getCurrentRound().getPlayer(1).setLives(-1); 
+				lives--; 
 				System.out.println("P1 Shot");
 				p1Time = 0;
 				/*
@@ -130,7 +121,7 @@ public class GameEngine {
 				*/
 			}
 			if( bubbleRect.intersects(p2Rect) && p2Time > 80) {
-				getCurrentRound().getPlayer(2).setLives(-1);
+				lives--;
 				System.out.println("P2 Shot");
 				p2Time = 0;
 				/*
@@ -237,7 +228,7 @@ public class GameEngine {
 			}
 		}
 		*/
-		if( getCurrentRound().getBullet(1) != null) {
+		if( getCurrentRound().getBullet(1) != null && getCurrentRound().getBullet(1).getYCoordinates() < 480) {
 			Rectangle b1Rect = getCurrentRound().getBullet(1).getBounds(); 
 			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) { 
 				Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
@@ -250,7 +241,7 @@ public class GameEngine {
 				
 			}
 		}
-		if( getCurrentRound().getBullet(2) != null) {
+		if( getCurrentRound().getBullet(2) != null && getCurrentRound().getBullet(2).getYCoordinates() < 480) {
 
 			Rectangle b2Rect = getCurrentRound().getBullet(2).getBounds();
 			for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
@@ -273,10 +264,6 @@ public class GameEngine {
 		handleBubbleWallCollision();
 		handlePlayerBubbleCollision();
 		handleBubbleMirrorCollision();
-	}
-	
-	public void changeRound( int rNumber) throws Exception {
-		round = new Round( rNumber);
 	}
 	
 	public class TimerListener implements ActionListener {

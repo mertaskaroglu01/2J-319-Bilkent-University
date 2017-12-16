@@ -27,8 +27,7 @@ public class GameManager {
 	public void startNewRound() throws Exception {
 		gameEngine.getCurrentRound().getPlayer(1).upgrade();
 		gameEngine.getCurrentRound().getPlayer(2).upgrade();
-		int rNumber = gameEngine.getCurrentRound().getRoundNumber();
-		gameEngine.changeRound( rNumber);
+		gameEngine.getCurrentRound().moveToNextRound();
 	}
 	
 	public void resumeGame() {
@@ -45,8 +44,7 @@ public class GameManager {
 	
 	public boolean isRoundEnd() {
 		if(gameEngine.getCurrentRound().getNoOfBubbles() == 0 ) {
-			return (true);
-			
+			return true;
 		}
 		else
 			return false;

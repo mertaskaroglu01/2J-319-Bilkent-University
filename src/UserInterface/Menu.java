@@ -136,6 +136,7 @@ public class Menu {
 		     }
 		     else if( selectedButton == menuPanel.btnPlay) {
 		    	card.show(cardPanel, "game");
+		    	gamePanel.startTimer();
 		     }
 		     else if( selectedButton == creditsPanel.btnCreditsBack) {
 		    	 card.show(cardPanel, "menu");
@@ -154,9 +155,19 @@ public class Menu {
 			 }
 		     else if( selectedButton == interPanel.btnProceed) {
 		    	 card.show(cardPanel, "game");
+		    	 gamePanel.startNext();
+		    	 gamePanel.startTimer();
 		     }
 		     else if( selectedButton == interPanel.btnInterBack) {
-		    	 card.show(cardPanel, "menu");		     }
+		    	 card.show(cardPanel, "menu");
+		    	 try {
+					gamePanel.getCurrentRound().startGameAgain();
+					gamePanel.changeAlertState();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch bloc
+					e1.printStackTrace();
+				}
+		     }
 		 }
 	 }
 	 
@@ -167,6 +178,7 @@ public class Menu {
 			if(alert) {
 				card.show(cardPanel, "inter");
 				alert = false;
+				gamePanel.stopTimer();
 				interPanel.messages = sendMessages();
 				interPanel.revalidate();
 				interPanel.repaint();

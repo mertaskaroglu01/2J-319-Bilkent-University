@@ -15,13 +15,11 @@ public class Player extends GameObject {
 	int weaponType;
 	boolean isShooting;
 	int score;
-	int lives;
     final BufferedImage image1, image2;
     int vel;
 	
 	Player( int playerId) throws Exception {
-		lives = 5;
-		weaponType = 0;
+		weaponType = 1;
 		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
         this.image1 = ImageIO.read(imageFile);
         File imageFile2 = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
@@ -87,17 +85,19 @@ public class Player extends GameObject {
 	}
 	
 	public void upgrade() {
-		if( score > 100) {
+		if( score > 1) {
 			changeWeaponType( 2);
 		}
 	}
 	
+	/*
 	public int getLives() {
 		return lives;
 	}
 	public void setLives(int change) {
 		lives = lives + change;
 	}
+	*/
 	
 	public void setVel( int vel) {
 		this.vel = vel;
