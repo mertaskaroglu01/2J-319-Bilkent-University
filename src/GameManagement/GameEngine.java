@@ -20,7 +20,7 @@ public class GameEngine {
 	
 	GameEngine() throws Exception {	
 		round = new Round();
-		lives = 2;
+		lives = 5;
 		p1Time = 0;
 		p2Time = 0;
 		timer.start();

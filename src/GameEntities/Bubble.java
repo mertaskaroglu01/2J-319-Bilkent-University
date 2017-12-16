@@ -20,13 +20,16 @@ public class Bubble extends GameObject {
 	public Bubble() throws IOException {
 		Random rand = new Random();
 		
-		x = rand.nextInt(1200) + 1;
-		y = rand.nextInt(300) + 1;
-		blueBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
-		greenBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
-		redBubbleImage = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
-		
+		x = rand.nextInt(1170) + 1;
+		y = rand.nextInt(300) + 30;
+		blueBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\BlueBubble.png"));
+		greenBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\GreenBubble.png"));
+		redBubbleImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\RedBubble.png"));
+
 		movingDirection = rand.nextInt(12) + 1;
+		while( movingDirection == 1 || movingDirection == 4 || movingDirection == 7 || movingDirection == 10) {
+			movingDirection = rand.nextInt(12) + 1;
+		}
 		
 		width = 30;
 		height = 30;

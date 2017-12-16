@@ -180,7 +180,7 @@ public class Round {
 				createGreenBubble();
 				createBlueBubble();
 			}
-			for( int i = 0; i < 2; i++) {
+			for( int i = 0; i < 1; i++) {
 				createMirror();
 			}
 		}
@@ -191,7 +191,73 @@ public class Round {
 				createGreenBubble();
 				createBlueBubble();
 			}
+			for( int i = 0; i < 1; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 4) {
+			for(int i = 0; i < 2; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
 			for( int i = 0; i < 2; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 6) {
+			for(int i = 0; i < 3; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 2; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 7) {
+			for(int i = 0; i < 3; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 3; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 8) {
+			for(int i = 0; i < 4; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 3; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 9) {
+			for(int i = 0; i < 4; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 4; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 10) {
+			for(int i = 0; i < 5; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 4; i++) {
 				createMirror();
 			}
 		}

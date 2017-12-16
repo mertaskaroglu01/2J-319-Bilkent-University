@@ -20,7 +20,7 @@ public class HighScoresPanel extends JPanel {
 		btnHSBack = new JButton("Back to Main Menu");
 		add(btnHSBack);
 		
-		Scanner inFile = new Scanner(new FileReader("C:\\Users\\Mert\\git\\2J-BubblePopper\\src\\HighScores.txt"));
+		Scanner inFile = new Scanner(new FileReader("C:\\Users\\serha\\git\\2J-BubblePopper\\src\\HighScores.txt"));
 		
 		
 	}

@@ -4,7 +4,7 @@ import GameEntities.Round;
 
 public class GameManager {
 	
-	private final int MAX_ROUND_NUMBER = 3;
+	private final int MAX_ROUND_NUMBER = 10;
 	private boolean paused;
 	public GameEngine gameEngine;
 	

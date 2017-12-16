@@ -20,9 +20,9 @@ public class Player extends GameObject {
 	
 	Player( int playerId) throws Exception {
 		weaponType = 1;
-		File imageFile = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
+		File imageFile = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja.png");
         this.image1 = ImageIO.read(imageFile);
-        File imageFile2 = new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
+        File imageFile2 = new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\Paper_Ninja_2.png");
         this.image2 = ImageIO.read(imageFile2);
         
         y = 480;
@@ -43,10 +43,10 @@ public class Player extends GameObject {
 	}
 	
 	public void goRight() {
-		if( x <1210)
+		if( x < 1137)
 			x = x + 10;
 		else  
-			x = 1200;
+			x = 1137;
 	}
 	
 	public void goLeft() {
@@ -85,9 +85,12 @@ public class Player extends GameObject {
 	}
 	
 	public void upgrade() {
-		if( score > 1) {
+		if( score > 150) {
 			changeWeaponType( 2);
+			if( score > 300)
+				changeWeaponType(3);
 		}
+		
 	}
 	
 	/*

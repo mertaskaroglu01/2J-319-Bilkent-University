@@ -21,11 +21,11 @@ public class HelpPanel extends JPanel {
 	public HelpPanel() {
 		setVisible(true);
 		
-		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
-		ImageIcon controls1 = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\controls1.png");
-		ImageIcon controls2 = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\controls2.png");
-		ImageIcon arrows = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\arrows.png");
-		ImageIcon wasd = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\wasd.png");
+		ImageIcon back = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\back.png");
+		ImageIcon controls1 = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\controls1.png");
+		ImageIcon controls2 = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\controls2.png");
+		ImageIcon arrows = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\arrows.png");
+		ImageIcon wasd = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\wasd.png");
 		
 		this.setLayout(new GridLayout(3,2) );
 		

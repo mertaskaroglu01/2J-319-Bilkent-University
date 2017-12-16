@@ -178,9 +178,9 @@ public class Menu {
 		    	 try {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
-					gamePanel.getCurrentEngine().setLives(2);
+					gamePanel.getCurrentEngine().setLives(5);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch bloc
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		     }
@@ -189,7 +189,7 @@ public class Menu {
 		    	 try {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
-					gamePanel.getCurrentEngine().setLives(2);
+					gamePanel.getCurrentEngine().setLives(5);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
