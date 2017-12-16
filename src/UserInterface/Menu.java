@@ -71,7 +71,8 @@ public class Menu {
 		
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuFrame.setSize(12200, 6400);  
-		menuFrame.setBounds(400, 200, 450, 300);	
+		menuFrame.setBounds(400, 200, 1200, 638);
+		menuFrame.setResizable(false);
 		menuFrame.setTitle("Bubble Popper");
 		
 		gamePanel = new GamePanel();
