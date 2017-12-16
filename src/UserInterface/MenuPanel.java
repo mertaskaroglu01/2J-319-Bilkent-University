@@ -1,14 +1,22 @@
 package UserInterface;
 
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import GameManagement.*;
 import GameEntities.*;
+import javax.swing.*;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 public class MenuPanel extends JPanel {
@@ -22,22 +30,67 @@ public class MenuPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+
 	
 	
 	public MenuPanel() {
 		this.setVisible(true);
-		btnPlay =  new JButton("Play");
-		btnCredits = new JButton("Credits");
-		btnHelp = new JButton("Help");
-		btnSettings = new JButton("Settings");
-		btnHighScores = new JButton("HighScores");
+		
+		ImageIcon play = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\play.png");
+		ImageIcon credits = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\credits.png");
+		ImageIcon help = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\help.png");
+		ImageIcon settings = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\settings.png");
+		ImageIcon logo = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\logo.png");
+		ImageIcon highscores = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\highscores.png");
+		btnPlay =  new JButton(play);	
+		btnCredits = new JButton(credits);
+		btnHelp = new JButton(help);
+		btnSettings = new JButton(settings);
+		btnHighScores = new JButton(highscores);
+		
+		btnPlay.setOpaque(false);
+		btnPlay.setContentAreaFilled(false);
+		btnPlay.setBorderPainted(false);
+		btnCredits.setOpaque(false);
+		btnCredits.setContentAreaFilled(false);
+		btnCredits.setBorderPainted(false);
+		btnSettings.setOpaque(false);
+		btnSettings.setContentAreaFilled(false);
+		btnSettings.setBorderPainted(false);
+		btnHelp.setOpaque(false);
+		btnHelp.setContentAreaFilled(false);
+		btnHelp.setBorderPainted(false);
+		btnHighScores.setOpaque(false);
+		btnHighScores.setContentAreaFilled(false);
+		btnHighScores.setBorderPainted(false);
+
+		JLabel iconLabel = new JLabel();
+		iconLabel.setIcon(logo);
+		
+		
+		
+		this.setLayout(new GridLayout(6,1));
+		this.add(iconLabel);
 		this.add(btnPlay);
-		this.add(btnSettings);
-		this.add(btnHighScores);
 		this.add(btnCredits);
+		this.add(btnSettings);
 		this.add(btnHelp);
+		this.add(btnHighScores);
+	}
+	
+	public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        //Add background picture to main menu
+        try {
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+        	g.drawImage(background, 0, 0, this);	
+        }
+        catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
-
+	
 }
