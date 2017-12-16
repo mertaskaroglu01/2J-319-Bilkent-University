@@ -66,6 +66,7 @@ public class MenuPanel extends JPanel {
 
 		JLabel iconLabel = new JLabel();
 		iconLabel.setIcon(logo);
+		iconLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		
 		
