@@ -36,7 +36,7 @@ public class EndingPanel extends JPanel {
 		}
 		
 		this.setVisible(true);
-		this.setLayout(new GridLayout(4,0));
+		this.setLayout(new GridLayout(5,1));
 		
 		ImageIcon game = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\gameover.png");
 		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
@@ -68,10 +68,10 @@ public class EndingPanel extends JPanel {
 		info2.setForeground(Color.WHITE);
 		
 		this.add(gameOver);
+		this.add(btnSaveScore);
 		this.add(info1);
 		this.add(info2);
-		this.add(btnEndingBack);
-		
+		this.add(btnEndingBack);	
 	}
 	
 	public void paintComponent(Graphics g) {

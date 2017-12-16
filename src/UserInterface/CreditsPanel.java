@@ -26,9 +26,9 @@ public class CreditsPanel extends JPanel {
 	public CreditsPanel() {
 		setVisible(true);
 		
-		ImageIcon credits1 = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\credits1.png");
-		ImageIcon credits2 = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\credits2.png");
-		ImageIcon back = new ImageIcon("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\back.png");
+		ImageIcon credits1 = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\credits1.png");
+		ImageIcon credits2 = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\credits2.png");
+		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
 		
 		this.setLayout(new GridLayout(3,1));
 		
@@ -54,7 +54,7 @@ public class CreditsPanel extends JPanel {
         super.paintComponent(g);
         //Add background picture to main menu
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
         	g.drawImage(background, 0, 0, this);	
         }
         catch (IOException e) {

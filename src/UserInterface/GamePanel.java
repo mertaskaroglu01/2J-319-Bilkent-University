@@ -120,7 +120,7 @@ public class GamePanel extends JPanel   {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\background.jpg"));
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
         	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
@@ -308,9 +308,6 @@ public class GamePanel extends JPanel   {
 					alerted = true;
 					getCurrentRound().getPlayer(1).changeShootingState(false);
 					getCurrentRound().getPlayer(2).changeShootingState(false);
-					if( getCurrentRound().getRoundNumber() == 3 || getCurrentRound().getRoundNumber() == 6 || getCurrentRound().getRoundNumber() == 9) {
-						getCurrentEngine().setLives(getCurrentEngine().getRemainingLives() + 3);
-					}
 				}
 				if(gameManager.isGameEnd() && !alerted) {
 					Menu.endOfGame();
