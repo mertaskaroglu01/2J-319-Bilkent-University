@@ -38,13 +38,14 @@ public class GamePanel extends JPanel   {
 	JLabel p1Scores;
 	JLabel p2Scores;
 	JButton nextLevel;
-	boolean paused;
+	boolean paused, alerted;
 
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
 	public GamePanel() throws Exception {
+		alerted = false;
 		paused  = false;
 		//addKeyListener(this);
 		lives = new JLabel("Lives = 5");
@@ -289,8 +290,9 @@ public class GamePanel extends JPanel   {
 	        		getCurrentRound().getBubble(i).move();
 	        	}
 				getCurrentEngine().handleCollisions();
-				if(gameManager.isRoundEnd()) {
+				if(gameManager.isRoundEnd() && !alerted) {
 					Menu.endOfRound();
+					alerted = true;
 				}
 				
 			}

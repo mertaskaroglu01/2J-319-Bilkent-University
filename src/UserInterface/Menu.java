@@ -45,14 +45,14 @@ public class Menu {
 	public SettingsPanel settingsPanel;
 	
 	CardLayout card;
-	private Timer timer = new Timer(17, new TimerListener());
+	Timer timer = new Timer(17, new TimerListener());
 	static boolean alert;
 	/**
 	 * Launch the application.
 	 */
 	
 	
-
+	
 	/**
 	 * Create the frame.
 	 * @throws Exception 
@@ -102,6 +102,7 @@ public class Menu {
 		settingsPanel.btnSettingsBack.addActionListener(new ButtonListener());
 		helpPanel.btnHelpBack.addActionListener(new ButtonListener());
 		interPanel.btnProceed.addActionListener(new ButtonListener());
+		interPanel.btnInterBack.addActionListener(new ButtonListener());
 		
 	}
 	 
@@ -120,7 +121,7 @@ public class Menu {
 	 	
 	 
 	 public static void endOfRound() {
-		 alert = true;        
+			 alert = true;       
 	 }
 	 
 	 public class ButtonListener implements ActionListener {
@@ -154,6 +155,8 @@ public class Menu {
 		     else if( selectedButton == interPanel.btnProceed) {
 		    	 card.show(cardPanel, "game");
 		     }
+		     else if( selectedButton == interPanel.btnInterBack) {
+		    	 card.show(cardPanel, "menu");		     }
 		 }
 	 }
 	 
@@ -164,10 +167,21 @@ public class Menu {
 			if(alert) {
 				card.show(cardPanel, "inter");
 				alert = false;
+				interPanel.messages = sendMessages();
+				interPanel.revalidate();
+				interPanel.repaint();
 			}
 				
 		}
 	
 	}
+	 
+	 public int[] sendMessages() {
+		 int[] messages = new int[3];
+		 messages[0] = gamePanel.getCurrentRound().getPlayer(1).getScore();
+		 messages[1] = gamePanel.getCurrentRound().getPlayer(2).getScore();
+		 messages[2] = gamePanel.getCurrentRound().getLives();
+		 return messages;
+	 }
 	 
 }

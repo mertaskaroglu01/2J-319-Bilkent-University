@@ -26,7 +26,7 @@ public class Round {
 			{
 				createRedBubble();
 				//createGreenBubble();
-				//createBlueBubble();
+				createBlueBubble();
 			}
 		}
 		if( roundNumber == 2) {
