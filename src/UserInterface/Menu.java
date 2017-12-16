@@ -44,6 +44,7 @@ public class Menu {
 	public HelpPanel helpPanel;
 	public SettingsPanel settingsPanel;
 	public EndingPanel endingPanel;
+	public HighScoresPanel hsPanel;
 	
 	CardLayout card;
 	Timer timer = new Timer(17, new TimerListener());
@@ -80,6 +81,7 @@ public class Menu {
 		settingsPanel = new SettingsPanel();
 		helpPanel = new HelpPanel();
 		endingPanel = new EndingPanel();
+		hsPanel = new HighScoresPanel();
 		
 	
 	
@@ -90,6 +92,7 @@ public class Menu {
 		cardPanel.add(helpPanel, "help");
 		cardPanel.add(settingsPanel, "settings");
 		cardPanel.add(endingPanel, "ending");
+		cardPanel.add(hsPanel, "highscores");
 		
 		menuFrame.setVisible(true);
 		menuFrame.add(cardPanel);
@@ -102,12 +105,15 @@ public class Menu {
 		menuPanel.btnCredits.addActionListener(new ButtonListener());
 		menuPanel.btnSettings.addActionListener(new ButtonListener());
 		menuPanel.btnHelp.addActionListener(new ButtonListener());
+		menuPanel.btnHighScores.addActionListener(new ButtonListener());
 		creditsPanel.btnCreditsBack.addActionListener(new ButtonListener());
 		settingsPanel.btnSettingsBack.addActionListener(new ButtonListener());
 		helpPanel.btnHelpBack.addActionListener(new ButtonListener());
 		interPanel.btnProceed.addActionListener(new ButtonListener());
 		interPanel.btnInterBack.addActionListener(new ButtonListener());
 		endingPanel.btnEndingBack.addActionListener(new ButtonListener());
+		endingPanel.btnSaveScore.addActionListener(new ButtonListener());
+		hsPanel.btnHSBack.addActionListener(new ButtonListener());
 		
 	}
 	 
@@ -188,6 +194,15 @@ public class Menu {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
 				}
+		     }
+		     else if( selectedButton == hsPanel.btnHSBack) {
+		    	 card.show(cardPanel, "menu");
+		     }
+		     else if( selectedButton == menuPanel.btnHighScores) {
+		    	 card.show(cardPanel, "highscores");
+		     }
+		     else if( selectedButton == endingPanel.btnSaveScore) {
+		    	 card.show(cardPanel, "menu");
 		     }
 		 }
 	 }

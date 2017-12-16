@@ -17,6 +17,7 @@ public class MenuPanel extends JPanel {
 	JButton btnCredits;
 	JButton btnHelp;
 	JButton btnSettings;
+	JButton btnHighScores;
 	//CreditPanel creditPanel;
 	/**
 	 * Create the panel.
@@ -29,9 +30,11 @@ public class MenuPanel extends JPanel {
 		btnCredits = new JButton("Credits");
 		btnHelp = new JButton("Help");
 		btnSettings = new JButton("Settings");
+		btnHighScores = new JButton("HighScores");
 		this.add(btnPlay);
-		this.add(btnCredits);
 		this.add(btnSettings);
+		this.add(btnHighScores);
+		this.add(btnCredits);
 		this.add(btnHelp);
 	}
 	
