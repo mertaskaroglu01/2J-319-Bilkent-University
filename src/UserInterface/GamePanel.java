@@ -48,6 +48,7 @@ public class GamePanel extends JPanel   {
 		startTimer = false;
 		alerted = false;
 		paused  = false;
+		//ended = false;
 		startNext = false;
 		//addKeyListener(this);
 		lives = new JLabel("Lives = 5");
@@ -119,7 +120,7 @@ public class GamePanel extends JPanel   {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\background.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Mert\\git\\2J-BubblePopper\\pictures\\background.jpg"));
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
         	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
@@ -158,7 +159,7 @@ public class GamePanel extends JPanel   {
 				 
 			}
         	// Lives and Scores
-        	lives.setText("Lives = " + getCurrentRound().getLives());
+        	//lives.setText("Lives = " + getCurrentRound().getLives());
         	p1Scores.setText("P1 Scores = " + getCurrentRound().getPlayer(1).getScore());
         	p2Scores.setText("P2 Scores = " + getCurrentRound().getPlayer(2).getScore());
         	//Weapon Change
@@ -172,6 +173,10 @@ public class GamePanel extends JPanel   {
         	for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
         		g.drawImage(getCurrentRound().getBubble(i).getImage(getCurrentRound().getBubble(i).getBubbleType()), getCurrentRound().getBubble(i).getXCoordinates(), getCurrentRound().getBubble(i).getYCoordinates(), this);
         	}
+        	// mirrors
+        	for( int i = 0; i < getCurrentRound().getNoOfMirrors(); i++ ) {
+                g.drawImage(getCurrentRound().getMirrors().get(i).getImage(), getCurrentRound().getMirrors().get(i).getXCoordinates(), getCurrentRound().getMirrors().get(i).getYCoordinates(), this);
+            }
         	/*
         	if(getCurrentRound().getNoOfBubbles() == 0)
         	{
@@ -297,12 +302,18 @@ public class GamePanel extends JPanel   {
 	        		getCurrentRound().getBubble(i).move();
 	        	}
 				getCurrentEngine().handleCollisions();
-				if(gameManager.isRoundEnd() && !alerted) {
+				lives.setText("Lives: " + getCurrentEngine().getRemainingLives());
+				if(gameManager.isRoundEnd() && !alerted && !gameManager.isGameEnd()) {
 					Menu.endOfRound();
 					alerted = true;
 					getCurrentRound().getPlayer(1).changeShootingState(false);
 					getCurrentRound().getPlayer(2).changeShootingState(false);
 				}
+				if(gameManager.isGameEnd() && !alerted) {
+					Menu.endOfGame();
+					alerted = true;
+				}
+				
 				if( startNext) {
 					try {
 						gameManager.startNewRound();
@@ -334,6 +345,5 @@ public class GamePanel extends JPanel   {
 		else
 			alerted = false;
 	}
-	
 
 }

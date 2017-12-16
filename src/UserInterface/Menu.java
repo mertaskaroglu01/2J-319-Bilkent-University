@@ -43,10 +43,11 @@ public class Menu {
 	public CreditsPanel creditsPanel;
 	public HelpPanel helpPanel;
 	public SettingsPanel settingsPanel;
+	public EndingPanel endingPanel;
 	
 	CardLayout card;
 	Timer timer = new Timer(17, new TimerListener());
-	static boolean alert;
+	static boolean alert, end;
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +61,7 @@ public class Menu {
 	public Menu() throws Exception {
 			
 		alert = false;
+		end = false;
 		
 		menuFrame = new JFrame("Menu");
 		
@@ -77,6 +79,7 @@ public class Menu {
 		creditsPanel = new CreditsPanel();
 		settingsPanel = new SettingsPanel();
 		helpPanel = new HelpPanel();
+		endingPanel = new EndingPanel();
 		
 	
 	
@@ -86,6 +89,7 @@ public class Menu {
 		cardPanel.add(gamePanel, "game");
 		cardPanel.add(helpPanel, "help");
 		cardPanel.add(settingsPanel, "settings");
+		cardPanel.add(endingPanel, "ending");
 		
 		menuFrame.setVisible(true);
 		menuFrame.add(cardPanel);
@@ -103,6 +107,7 @@ public class Menu {
 		helpPanel.btnHelpBack.addActionListener(new ButtonListener());
 		interPanel.btnProceed.addActionListener(new ButtonListener());
 		interPanel.btnInterBack.addActionListener(new ButtonListener());
+		endingPanel.btnEndingBack.addActionListener(new ButtonListener());
 		
 	}
 	 
@@ -122,6 +127,10 @@ public class Menu {
 	 
 	 public static void endOfRound() {
 			 alert = true;       
+	 }
+	 
+	 public static void endOfGame() {
+		 end = true;
 	 }
 	 
 	 public class ButtonListener implements ActionListener {
@@ -163,6 +172,18 @@ public class Menu {
 		    	 try {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
+					gamePanel.getCurrentEngine().setLives(2);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch bloc
+					e1.printStackTrace();
+				}
+		     }
+		     else if( selectedButton == endingPanel.btnEndingBack) {
+		    	 card.show(cardPanel, "menu");
+		    	 try {
+					gamePanel.getCurrentRound().startGameAgain();
+					gamePanel.changeAlertState();
+					gamePanel.getCurrentEngine().setLives(2);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
@@ -183,6 +204,14 @@ public class Menu {
 				interPanel.revalidate();
 				interPanel.repaint();
 			}
+			else if( end) {
+				card.show(cardPanel, "ending");
+				end = false;
+				gamePanel.stopTimer();
+				endingPanel.messages = sendMessages();
+				endingPanel.revalidate();
+				endingPanel.repaint();
+			}
 				
 		}
 	
@@ -192,7 +221,7 @@ public class Menu {
 		 int[] messages = new int[3];
 		 messages[0] = gamePanel.getCurrentRound().getPlayer(1).getScore();
 		 messages[1] = gamePanel.getCurrentRound().getPlayer(2).getScore();
-		 messages[2] = gamePanel.getCurrentRound().getLives();
+		 messages[2] = gamePanel.getCurrentEngine().getRemainingLives();
 		 return messages;
 	 }
 	 

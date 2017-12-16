@@ -20,6 +20,7 @@ public class GameEngine {
 	
 	GameEngine() throws Exception {	
 		round = new Round();
+		lives = 2;
 		p1Time = 0;
 		p2Time = 0;
 		timer.start();
@@ -37,6 +38,14 @@ public class GameEngine {
 		return lives;
 	}
 	
+	public void setLives( int l) {
+		lives = l;
+	}
+	/*
+	public void decrementLives() {
+		lives--;
+	}
+	*/
 	
 	public void updateScore(int playerId, int bubbleType) {
 		if(playerId == 1) {
@@ -198,7 +207,17 @@ public class GameEngine {
 	}
 	
 	public void handleBubbleMirrorCollision() {
-		
+		for(int i = 0; i < getCurrentRound().getMirrors().size(); i++)
+		  {
+			Rectangle mirrorRect = getCurrentRound().getMirrors().get(i).getBounds();
+			for( int j = 0; j < getCurrentRound().getNoOfBubbles(); j++ ) { 
+				Rectangle bubbleRect = getCurrentRound().getBubble(j).getBounds();
+				if( bubbleRect.intersects(mirrorRect)) {
+					getCurrentRound().getMirrors().get(i).teleport(getCurrentRound().getBubble(j));
+		    }
+		    
+		   }
+		  }
 	}
 	
 	

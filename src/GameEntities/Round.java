@@ -2,6 +2,7 @@ package GameEntities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Round {
 	ArrayList<GameObject>[] gameObjects;
@@ -11,7 +12,6 @@ public class Round {
 	public Bullet bullet2;
 	public Player player1;
 	public Player player2;
-	int lives;
 	int roundNumber;
 	
 	public Round() throws Exception {
@@ -20,15 +20,23 @@ public class Round {
 		createCharacter(2);
 		//createBullet(1);
 		//createBullet(2);
+		mirrors = new ArrayList<Mirror>();
 		bubbles = new ArrayList<Bubble>();
+		createRedBubble();
+		createMirror();
+		//createGreenBubble();
+		createBlueBubble();
 		
-			for(int i = 0; i < 1; i++)
-			{
-				createRedBubble();
-				//createGreenBubble();
-				createBlueBubble();
-			}
-		
+	}
+	
+	public ArrayList<Mirror> getMirrors()
+	{
+		return mirrors;
+	}
+	
+	public int getNoOfMirrors()
+	{
+		return mirrors.size();
 	}
 	
 	public int getRoundNumber() {
@@ -55,7 +63,9 @@ public class Round {
 		else if (bulletId == 2)
 			bullet2 = null;
 	}
-	
+	public void createMirror() throws IOException {
+		  mirrors.add(new Mirror());
+		 }
 	public void createRedBubble() throws IOException {
 		bubbles.add( new RedBubble() );
 	}
@@ -120,6 +130,7 @@ public class Round {
 			return bullet2;
 	}
 	
+	/*
 	public int getLives() {
 		return lives;
 	}
@@ -131,17 +142,13 @@ public class Round {
 	public void removeLives() {
 		lives--;
 	}
+	*/
 	
 	public void startGameAgain() throws Exception {
-		roundNumber = 0;
-		for( int i = 0; i < bubbles.size(); i++) {
-			bubbles.remove(i);
-		}
-		/*
-		for( int i = 0; i < mirrors.size(); i++) {
-			mirrors.remove(i);
-		}
-		*/
+		roundNumber = 1;
+			bubbles.clear();
+			mirrors.clear();
+		
 		removeBullet(1);
 		removeBullet(2);
 		removeCharacter(1);
@@ -150,24 +157,16 @@ public class Round {
 		createCharacter(2);
 		createBullet(1, player1.getWeaponType());
 		createBullet(2, player2.getWeaponType());
-		for(int i = 0; i < 1; i++)
-		{
-			createRedBubble();
-			//createGreenBubble();
-			createBlueBubble();
-		}
+		createRedBubble();
+		createBlueBubble();
+		createMirror();
 	}
 	
 	public void moveToNextRound() throws IOException {
 		roundNumber++;
-		for( int i = 0; i < bubbles.size(); i++) {
-			bubbles.remove(i);
-		}
-		/*
-		for( int i = 0; i < mirrors.size(); i++) {
-			mirrors.remove(i);
-		}
-		*/
+		bubbles.clear();
+		mirrors.clear();
+		
 		removeBullet(1);
 		removeBullet(2);
 		
@@ -180,6 +179,20 @@ public class Round {
 				createRedBubble();
 				createGreenBubble();
 				createBlueBubble();
+			}
+			for( int i = 0; i < 2; i++) {
+				createMirror();
+			}
+		}
+		if( roundNumber == 3) {
+			for(int i = 0; i < 2; i++)
+			{
+				createRedBubble();
+				createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 2; i++) {
+				createMirror();
 			}
 		}
 	}
