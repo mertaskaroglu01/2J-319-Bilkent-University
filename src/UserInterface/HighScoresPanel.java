@@ -22,7 +22,7 @@ public class HighScoresPanel extends JPanel {
 	 */
 	public HighScoresPanel() throws FileNotFoundException {
 		setVisible(true);
-		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
+		ImageIcon back = new ImageIcon("pictures/back.png");
 		btnHSBack = new JButton(back);
 		btnHSBack = new JButton(back);
 		btnHSBack.setOpaque(false);
@@ -30,7 +30,7 @@ public class HighScoresPanel extends JPanel {
 		btnHSBack.setBorderPainted(false);
 		this.add(btnHSBack);
 		
-		Scanner inFile = new Scanner(new FileReader("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\src\\HighScores.txt"));
+		Scanner inFile = new Scanner(new FileReader("pictures/HighScores.txt"));
 		
 		
 	}
@@ -39,7 +39,7 @@ public class HighScoresPanel extends JPanel {
         super.paintComponent(g);
         //Add background picture to main menu
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("pictures/menubackground.jpg"));
         	g.drawImage(background, 0, 0, this);	
         }
         catch (IOException e) {

@@ -24,9 +24,9 @@ public class SettingsPanel extends JPanel {
 		setVisible(true);
 		setLayout(new GridLayout(3,1));
 		
-		ImageIcon soundon = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\soundon.png");
-		ImageIcon soundoff = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\soundoff.png");
-		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
+		ImageIcon soundon = new ImageIcon("pictures/soundon.png");
+		ImageIcon soundoff = new ImageIcon("pictures/soundoff.png");
+		ImageIcon back = new ImageIcon("pictures/back.png");
 		
 		on = new JLabel();
 		off = new JLabel();
@@ -50,7 +50,7 @@ public class SettingsPanel extends JPanel {
         super.paintComponent(g);
         //Add background picture to main menu
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("pictures/menubackground.jpg"));
         	g.drawImage(background, 0, 0, this);	
         }
         catch (IOException e) {

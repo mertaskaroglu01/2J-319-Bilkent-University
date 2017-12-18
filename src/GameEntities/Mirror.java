@@ -17,7 +17,7 @@ public class Mirror extends GameObject {
 		  width  = 45;
 		  x = rand.nextInt(1150) + 1;
 		  y = rand.nextInt(300) + 50;
-		  mirrorImage = ImageIO.read(new File("C:\\Users\\serha\\git\\2J-BubblePopper\\pictures\\mirror.png"));
+		  mirrorImage = ImageIO.read(new File("pictures/mirror.png"));
 	 
 	 }
 	 //sdsadsasadsaas

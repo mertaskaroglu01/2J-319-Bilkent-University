@@ -119,7 +119,7 @@ public class GameEngine {
 		for(int i = 0; i < getCurrentRound().getNoOfBubbles();i++)
 		{
 			Rectangle bubbleRect = getCurrentRound().getBubble(i).getBounds();
-			if( bubbleRect.intersects(p1Rect) && p1Time > 80) {
+			if( bubbleRect.intersects(p1Rect) && p1Time >40) {
 				lives--; 
 				System.out.println("P1 Shot");
 				p1Time = 0;
@@ -129,7 +129,7 @@ public class GameEngine {
 				return 1;
 				*/
 			}
-			if( bubbleRect.intersects(p2Rect) && p2Time > 80) {
+			if( bubbleRect.intersects(p2Rect) && p2Time > 40) {
 				lives--;
 				System.out.println("P2 Shot");
 				p2Time = 0;

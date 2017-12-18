@@ -41,8 +41,8 @@ public class InterPanel extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new GridLayout(5,0));
 		
-		ImageIcon nextlevel = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\nextlevel.png");
-		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
+		ImageIcon nextlevel = new ImageIcon("pictures/nextlevel.png");
+		ImageIcon back = new ImageIcon("pictures/back.png");
 		btnProceed = new JButton(nextlevel);
 		btnInterBack = new JButton(back);
 		
@@ -85,7 +85,7 @@ public class InterPanel extends JPanel {
 			info2.setText("Player 2 Score: " + messages[1]);
 			info3.setText("Lives Remaining: " + messages[2]);
 			 try {
-		        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+		        	final BufferedImage background = ImageIO.read(new File("pictures/menubackground.jpg"));
 		        	g.drawImage(background, 0, 0, this);	
 		        }
 		        catch (IOException e) {

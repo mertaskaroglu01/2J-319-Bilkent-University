@@ -206,6 +206,17 @@ public class Round {
 				createMirror();
 			}
 		}
+		if( roundNumber == 5) {
+			for(int i = 0; i < 3; i++)
+			{
+				createRedBubble();
+				//createGreenBubble();
+				createBlueBubble();
+			}
+			for( int i = 0; i < 2; i++) {
+				createMirror();
+			}
+		}
 		if( roundNumber == 6) {
 			for(int i = 0; i < 3; i++)
 			{

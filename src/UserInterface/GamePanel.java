@@ -58,17 +58,31 @@ public class GamePanel extends JPanel   {
 		add(lives);
 		add(p1Scores);
 		add(p2Scores);
-		addKeyBinding(this,KeyEvent.VK_A,"P1Left",(evt) -> {
-			getCurrentRound().getPlayer(1).goLeft();
-			//getCurrentRound().getPlayer(1).setVel(-10);
-			repaint();
+		addKeyBindingPressed(this,KeyEvent.VK_A,"P1LeftPressed",(evt) -> {
+			//getCurrentRound().getPlayer(1).goLeft();
+			if( getCurrentRound().getPlayer(1).getXCoordinates() < 0)
+				getCurrentRound().getPlayer(1).setVel(0);
+			else
+				getCurrentRound().getPlayer(1).setVel(-8);
+			//repaint();
 		});
-		addKeyBinding(this,KeyEvent.VK_D,"P1Right",(evt) -> {
-			getCurrentRound().getPlayer(1).goRight();
-			//getCurrentRound().getPlayer(1).setVel(10);
-    		repaint();     
+		addKeyBindingReleased(this,KeyEvent.VK_A,"P1LeftReleased",(evt) -> {
+			//getCurrentRound().getPlayer(1).goLeft();
+			getCurrentRound().getPlayer(1).setVel(0);
+			//repaint();
 		});
-		addKeyBinding(this,KeyEvent.VK_W,"P1Fire",(evt) -> {
+		addKeyBindingPressed(this,KeyEvent.VK_D,"P1RightPressed",(evt) -> {
+			if(getCurrentRound().getPlayer(1).getXCoordinates() > 1137)
+				getCurrentRound().getPlayer(1).setVel(0);
+			else
+				getCurrentRound().getPlayer(1).setVel(8);
+		});
+		addKeyBindingReleased(this,KeyEvent.VK_D,"P1RightReleased",(evt) -> {
+			//getCurrentRound().getPlayer(1).goRight();
+			getCurrentRound().getPlayer(1).setVel(0);
+    		//repaint();     
+		});
+		addKeyBindingPressed(this,KeyEvent.VK_W,"P1Fire",(evt) -> {
 			if( !getCurrentRound().getPlayer(1).isShooting() ) {
         		try {
         			getCurrentRound().createBullet(1,  getCurrentRound().getPlayer(1).getWeaponType());
@@ -79,15 +93,30 @@ public class GamePanel extends JPanel   {
         		getCurrentRound().getPlayer(1).shoot();	
         	}                	
 		});
-		addKeyBinding(this,KeyEvent.VK_LEFT,"P2Left",(evt) -> {
-			getCurrentRound().getPlayer(2).goLeft();
+		
+		addKeyBindingPressed(this,KeyEvent.VK_LEFT,"P2LeftPressed",(evt) -> {
+			if( getCurrentRound().getPlayer(2).getXCoordinates() < 0)
+				getCurrentRound().getPlayer(2).setVel(0);
+			else
+				getCurrentRound().getPlayer(2).setVel(-8);
 			repaint();
 		});
-		addKeyBinding(this,KeyEvent.VK_RIGHT,"P2Right",(evt) -> {
-			getCurrentRound().getPlayer(2).goRight();
+		addKeyBindingReleased(this,KeyEvent.VK_LEFT,"P2LeftReleased",(evt) -> {
+			getCurrentRound().getPlayer(2).setVel(0);;
 			repaint();
 		});
-		addKeyBinding(this,KeyEvent.VK_UP,"Fire",(evt) -> {
+		addKeyBindingPressed(this,KeyEvent.VK_RIGHT,"P2RightPressed",(evt) -> {
+			if(getCurrentRound().getPlayer(2).getXCoordinates() > 1137)
+				getCurrentRound().getPlayer(2).setVel(0);
+			else
+				getCurrentRound().getPlayer(2).setVel(8);
+			repaint();
+		});
+		addKeyBindingReleased(this,KeyEvent.VK_RIGHT,"P2RightReleased",(evt) -> {
+			getCurrentRound().getPlayer(2).setVel(0);
+			repaint();
+		});
+		addKeyBindingPressed(this,KeyEvent.VK_UP,"Fire",(evt) -> {
 				if( !getCurrentRound().getPlayer(2).isShooting() ) {
 	        		try {
 	        			getCurrentRound().createBullet(2, getCurrentRound().getPlayer(2).getWeaponType());
@@ -98,7 +127,8 @@ public class GamePanel extends JPanel   {
 	        		getCurrentRound().getPlayer(2).shoot();	
 	        	}		
 		});
-		addKeyBinding(this,KeyEvent.VK_P,"Pause",(evt) -> {
+		
+		addKeyBindingPressed(this,KeyEvent.VK_P,"Pause",(evt) -> {
 			if( !paused) {
 				timer.stop();
 				paused = true;
@@ -120,7 +150,9 @@ public class GamePanel extends JPanel   {
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\background.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("pictures/background.jpg"));
+        	getCurrentRound().getPlayer(1).changeXCoordinates(getCurrentRound().getPlayer(1).getXCoordinates() + getCurrentRound().getPlayer(1).getVel());
+        	getCurrentRound().getPlayer(2).changeXCoordinates(getCurrentRound().getPlayer(2).getXCoordinates() + getCurrentRound().getPlayer(2).getVel());
         	g.drawImage(background, 0, 0, this);	
         	//Player1 draw
         	g.drawImage(getCurrentRound().getPlayer(1).getImage(1), getCurrentRound().getPlayer(1).getXCoordinates(), getCurrentRound().getPlayer(1).getYCoordinates(), this);
@@ -278,11 +310,25 @@ public class GamePanel extends JPanel   {
 		
 	}*/
 	@SuppressWarnings("serial")
-	public void addKeyBinding(JComponent comp,int keyCode, String id, ActionListener lambda)
+	public void addKeyBindingPressed(JComponent comp,int keyCode, String id, ActionListener lambda)
 	{
 		InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW );
 		ActionMap ap = comp.getActionMap();
 		im.put(KeyStroke.getKeyStroke(keyCode,0,false),id);
+		ap.put(id, new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				lambda.actionPerformed(e);
+			}
+		});
+	}
+	
+	public void addKeyBindingReleased(JComponent comp,int keyCode, String id, ActionListener lambda)
+	{
+		InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW );
+		ActionMap ap = comp.getActionMap();
+		im.put(KeyStroke.getKeyStroke(keyCode,0,true),id);
 		ap.put(id, new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -308,6 +354,11 @@ public class GamePanel extends JPanel   {
 					alerted = true;
 					getCurrentRound().getPlayer(1).changeShootingState(false);
 					getCurrentRound().getPlayer(2).changeShootingState(false);
+					if( getCurrentRound().getRoundNumber() == 3 || getCurrentRound().getRoundNumber() == 6 || getCurrentRound().getRoundNumber() == 9) {
+						getCurrentEngine().setLives(getCurrentEngine().getRemainingLives() + 3);
+					}
+					getCurrentRound().getPlayer(1).setVel(0);
+					getCurrentRound().getPlayer(2).setVel(0);
 				}
 				if(gameManager.isGameEnd() && !alerted) {
 					Menu.endOfGame();

@@ -38,9 +38,9 @@ public class EndingPanel extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new GridLayout(5,1));
 		
-		ImageIcon game = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\gameover.png");
-		ImageIcon back = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\back.png");
-		ImageIcon save = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\savescore.png");
+		ImageIcon game = new ImageIcon("pictures/gameover.png");
+		ImageIcon back = new ImageIcon("pictures/back.png");
+		ImageIcon save = new ImageIcon("pictures/savescore.png");
 		
 		
 		btnSaveScore = new JButton(save);
@@ -80,7 +80,7 @@ public class EndingPanel extends JPanel {
 			info2.setText("Player 2 Score: " + messages[1]);
 			
 			try {
-	        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+	        	final BufferedImage background = ImageIO.read(new File("pictures/menubackground.jpg"));
 	        	g.drawImage(background, 0, 0, this);	
 	        }
 	        catch (IOException e) {

@@ -36,12 +36,12 @@ public class MenuPanel extends JPanel {
 	public MenuPanel() {
 		this.setVisible(true);
 		
-		ImageIcon play = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\play.png");
-		ImageIcon credits = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\credits.png");
-		ImageIcon help = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\help.png");
-		ImageIcon settings = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\settings.png");
-		ImageIcon logo = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\logo.png");
-		ImageIcon highscores = new ImageIcon("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\highscores.png");
+		ImageIcon play = new ImageIcon("pictures/play.png");
+		ImageIcon credits = new ImageIcon("pictures/credits.png");
+		ImageIcon help = new ImageIcon("pictures/help.png");
+		ImageIcon settings = new ImageIcon("pictures/settings.png");
+		ImageIcon logo = new ImageIcon("pictures/logo.png");
+		ImageIcon highscores = new ImageIcon("pictures/highscores.png");
 		btnPlay =  new JButton(play);	
 		btnCredits = new JButton(credits);
 		btnHelp = new JButton(help);
@@ -83,7 +83,7 @@ public class MenuPanel extends JPanel {
         super.paintComponent(g);
         //Add background picture to main menu
         try {
-        	final BufferedImage background = ImageIO.read(new File("C:\\Users\\Faaiz\\git\\2J-BubblePopper\\pictures\\menubackground.jpg"));
+        	final BufferedImage background = ImageIO.read(new File("pictures/menubackground.jpg"));
         	g.drawImage(background, 0, 0, this);	
         }
         catch (IOException e) {

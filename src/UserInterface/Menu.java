@@ -71,7 +71,8 @@ public class Menu {
 		
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuFrame.setSize(12200, 6400);  
-		menuFrame.setBounds(400, 200, 450, 300);	
+		menuFrame.setBounds(400, 200, 1210, 638);
+		menuFrame.setResizable(false);
 		menuFrame.setTitle("Bubble Popper");
 		
 		gamePanel = new GamePanel();
@@ -178,7 +179,7 @@ public class Menu {
 		    	 try {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
-					gamePanel.getCurrentEngine().setLives(2);
+					gamePanel.getCurrentEngine().setLives(5);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
@@ -189,7 +190,7 @@ public class Menu {
 		    	 try {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
-					gamePanel.getCurrentEngine().setLives(2);
+					gamePanel.getCurrentEngine().setLives(5);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
