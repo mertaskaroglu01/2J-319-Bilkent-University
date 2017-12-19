@@ -4,7 +4,11 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
 import GameEntities.*;
@@ -19,6 +23,7 @@ public class GameEngine {
 	private Timer timer = new Timer(17, new TimerListener());
 	
 	GameEngine() throws Exception {	
+		soundManager = new SoundManager();
 		round = new Round();
 		lives = 5;
 		p1Time = 0;
@@ -26,6 +31,9 @@ public class GameEngine {
 		timer.start();
 	}
 	
+	public SoundManager getSoundManager() {
+		return this.soundManager;
+	}
 	public Round getCurrentRound() {
 		return round;
 	}
@@ -79,7 +87,7 @@ public class GameEngine {
 			return round.getPlayer(2).getXCoordinates();
 	}
 	
-	public void handlePlayerBubbleCollision() {
+	public void handlePlayerBubbleCollision() throws MalformedURLException, UnsupportedAudioFileException, IOException, LineUnavailableException {
 		/*
 		if(getCurrentRound().getPlayer(1) != null && getCurrentRound().getPlayer(2) != null)
 		{
@@ -123,6 +131,7 @@ public class GameEngine {
 				lives--; 
 				System.out.println("P1 Shot");
 				p1Time = 0;
+				this.getSoundManager().play(2);
 				/*
 				if(getCurrentRound().getPlayer(1).getLives() <= 0)
 					return -1;
@@ -133,6 +142,7 @@ public class GameEngine {
 				lives--;
 				System.out.println("P2 Shot");
 				p2Time = 0;
+				this.getSoundManager().play(2);
 				/*
 				if(getCurrentRound().getPlayer(2).getLives() <= 0)
 					return -1;
@@ -221,7 +231,7 @@ public class GameEngine {
 	}
 	
 	
-	public void handleBulletBubbleCollision() {
+	public void handleBulletBubbleCollision() throws MalformedURLException, UnsupportedAudioFileException, IOException, LineUnavailableException {
 		/*
 		if( getCurrentRound().getBullet(1) != null && getCurrentRound().getBullet(2) != null) {
 			int b1xPos = getCurrentRound().getBullet(1).getXCoordinates();
@@ -254,6 +264,7 @@ public class GameEngine {
 				if( b1Rect.intersects(bubbleRect)) {
 					int type = getCurrentRound().getBubble(i).getBubbleType();
 					updateScore(1, type);
+					this.getSoundManager().play(3);
 					getCurrentRound().getBubbles().remove(i);
 					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
 				}
@@ -268,6 +279,7 @@ public class GameEngine {
 				if( b2Rect.intersects(bubbleRect)) {
 					int type = getCurrentRound().getBubble(i).getBubbleType();
 					updateScore(2, type);
+					this.getSoundManager().play(3);
 					getCurrentRound().getBubbles().remove(i);
 					System.out.println("Score of player 1: " + getCurrentRound().getPlayer(1).getScore() + " Score of Player 2: " + getCurrentRound().getPlayer(2).getScore());
 				}
@@ -278,7 +290,7 @@ public class GameEngine {
 	
 	}
 	
-	public void handleCollisions() {
+	public void handleCollisions() throws MalformedURLException, UnsupportedAudioFileException, IOException, LineUnavailableException {
 		handleBulletBubbleCollision();
 		handleBubbleWallCollision();
 		handlePlayerBubbleCollision();

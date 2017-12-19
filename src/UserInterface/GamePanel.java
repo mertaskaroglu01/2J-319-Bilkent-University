@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
@@ -38,6 +41,7 @@ public class GamePanel extends JPanel   {
 	JLabel p1Scores;
 	JLabel p2Scores;
 	JButton nextLevel;
+	Clip backgroundMusic;
 	boolean paused, alerted, startNext, startTimer;
 
 	/**
@@ -144,6 +148,7 @@ public class GamePanel extends JPanel   {
 	    this.gameManager = new GameManager();	
 		this.setVisible(true);
 		timer.start();
+		backgroundMusic = this.getCurrentEngine().getSoundManager().play(1);
 	}
 	
 	
@@ -347,9 +352,15 @@ public class GamePanel extends JPanel   {
 				for( int i = 0; i < getCurrentRound().getNoOfBubbles(); i++ ) {
 	        		getCurrentRound().getBubble(i).move();
 	        	}
-				getCurrentEngine().handleCollisions();
-				lives.setText("Lives: " + getCurrentEngine().getRemainingLives());
+				try {
+					getCurrentEngine().handleCollisions();
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				lives.setText("Live	s: " + getCurrentEngine().getRemainingLives());
 				if(gameManager.isRoundEnd() && !alerted && !gameManager.isGameEnd()) {
+					
 					Menu.endOfRound();
 					alerted = true;
 					getCurrentRound().getPlayer(1).changeShootingState(false);
@@ -359,6 +370,14 @@ public class GamePanel extends JPanel   {
 					}
 					getCurrentRound().getPlayer(1).setVel(0);
 					getCurrentRound().getPlayer(2).setVel(0);
+					try {
+						Clip round_end_music = getCurrentEngine().getSoundManager().play(4);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					
 				}
 				if(gameManager.isGameEnd() && !alerted) {
 					Menu.endOfGame();

@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 public class SettingsPanel extends JPanel {
 
 	JButton btnSettingsBack;
-	JLabel on;
-	JLabel off;
+	JButton on;
+	JButton off;
 	/**
 	 * Create the panel.
 	 */
@@ -28,8 +28,8 @@ public class SettingsPanel extends JPanel {
 		ImageIcon soundoff = new ImageIcon("pictures/soundoff.png");
 		ImageIcon back = new ImageIcon("pictures/back.png");
 		
-		on = new JLabel();
-		off = new JLabel();
+		on = new JButton();
+		off = new JButton();
 		on.setIcon(soundon);
 		off.setIcon(soundoff);
 		on.setHorizontalAlignment(JLabel.CENTER);

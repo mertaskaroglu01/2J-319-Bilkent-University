@@ -30,7 +30,7 @@ public class HighScoresPanel extends JPanel {
 		btnHSBack.setBorderPainted(false);
 		this.add(btnHSBack);
 		
-		Scanner inFile = new Scanner(new FileReader("pictures/HighScores.txt"));
+		Scanner inFile = new Scanner(new FileReader("src/HighScores.txt"));
 		
 		
 	}

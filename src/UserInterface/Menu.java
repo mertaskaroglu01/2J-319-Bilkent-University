@@ -18,6 +18,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -30,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+import GameManagement.SoundManager;
 import UserInterface.GamePanel.TimerListener;
 
 public class Menu {
@@ -49,6 +53,7 @@ public class Menu {
 	CardLayout card;
 	Timer timer = new Timer(17, new TimerListener());
 	static boolean alert, end;
+	Clip clip = null; //initial value
 	/**
 	 * Launch the application.
 	 */
@@ -115,6 +120,9 @@ public class Menu {
 		endingPanel.btnEndingBack.addActionListener(new ButtonListener());
 		endingPanel.btnSaveScore.addActionListener(new ButtonListener());
 		hsPanel.btnHSBack.addActionListener(new ButtonListener());
+		settingsPanel.on.addActionListener(new ButtonListener());
+		settingsPanel.off.addActionListener(new ButtonListener());
+
 		
 	}
 	 
@@ -140,6 +148,7 @@ public class Menu {
 		 end = true;
 	 }
 	 
+	 
 	 public class ButtonListener implements ActionListener {
 		 
 		 public void actionPerformed(ActionEvent e) {
@@ -151,6 +160,12 @@ public class Menu {
 		    	 card.show(cardPanel, "credits");
 		     }
 		     else if( selectedButton == menuPanel.btnPlay) {
+		    	 if((gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
+		    		 gamePanel.getCurrentEngine().getSoundManager().stopSound(gamePanel.backgroundMusic);
+		    	 }
+		    	 if(clip != null) {
+		    		 gamePanel.getCurrentEngine().getSoundManager().stopSound(clip);
+		    	 }
 		    	card.show(cardPanel, "game");
 		    	gamePanel.startTimer();
 		     }
@@ -184,6 +199,15 @@ public class Menu {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
 				}
+		    	 //if(!(gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
+		    		 try {
+		    			// System.out.println("test_blok1");
+		    			 clip = gamePanel.getCurrentEngine().getSoundManager().play(1);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	 //}
 		     }
 		     else if( selectedButton == endingPanel.btnEndingBack) {
 		    	 card.show(cardPanel, "menu");
@@ -195,6 +219,14 @@ public class Menu {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
 				}
+		    	// if(!(gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
+		    		 try {
+		    			 clip = gamePanel.getCurrentEngine().getSoundManager().play(1);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	// }
 		     }
 		     else if( selectedButton == hsPanel.btnHSBack) {
 		    	 card.show(cardPanel, "menu");
@@ -204,6 +236,24 @@ public class Menu {
 		     }
 		     else if( selectedButton == endingPanel.btnSaveScore) {
 		    	 card.show(cardPanel, "menu");
+		     }
+		     else if( selectedButton == settingsPanel.on) {
+		    	 if(!(gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
+		    		 try {
+		    			 clip = gamePanel.getCurrentEngine().getSoundManager().play(1);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	 }
+		     }
+		     else if( selectedButton == settingsPanel.off) {
+		    	 if((gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
+		    		 gamePanel.getCurrentEngine().getSoundManager().stopSound(gamePanel.backgroundMusic);
+		    	 }
+		    	 if(clip != null) {
+		    		 gamePanel.getCurrentEngine().getSoundManager().stopSound(clip);
+		    	 }
 		     }
 		 }
 	 }

@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import GameManagement.SoundManager;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -30,6 +32,7 @@ public class InterPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
 	public InterPanel() {
 		messages = new int[3];
 		if( messages == null) {
