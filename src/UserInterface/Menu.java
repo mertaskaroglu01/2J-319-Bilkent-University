@@ -12,7 +12,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -215,6 +217,7 @@ public class Menu {
 					gamePanel.getCurrentRound().startGameAgain();
 					gamePanel.changeAlertState();
 					gamePanel.getCurrentEngine().setLives(5);
+					hsPanel.repaint();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch bloc
 					e1.printStackTrace();
@@ -235,8 +238,33 @@ public class Menu {
 		    	 card.show(cardPanel, "highscores");
 		     }
 		     else if( selectedButton == endingPanel.btnSaveScore) {
-		    	 card.show(cardPanel, "menu");
+		    	 int count = 0;
+		    	 try {
+		    		 FileWriter fileWritter = new FileWriter("src/HighScores.txt",true);        
+		             BufferedWriter writer = new BufferedWriter(fileWritter);
+					//if(gamePanel.getCurrentManager().isHighScore(gamePanel.getCurrentRound().getPlayer(1).getScore() + gamePanel.getCurrentRound().getPlayer(2).getScore()))
+					//{
+						
+						if(count <= 0)
+						{	
+							writer.newLine();
+							writer.write((endingPanel.getName()+(gamePanel.getCurrentRound().getPlayer(1).getScore() + gamePanel.getCurrentRound().getPlayer(2).getScore())));
+							
+							if ( writer != null)
+						        writer.close( );
+							
+							count++;							
+						}
+					//}
+					
+		             fileWritter.close();
+				
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		     }
+		     
 		     else if( selectedButton == settingsPanel.on) {
 		    	 if(!(gamePanel.getCurrentEngine().getSoundManager().getPlaying())) {
 		    		 try {

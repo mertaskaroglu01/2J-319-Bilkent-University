@@ -1,4 +1,5 @@
 package UserInterface;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -147,6 +148,11 @@ public class GamePanel extends JPanel   {
 	    setFocusTraversalKeysEnabled(false);
 	    this.gameManager = new GameManager();	
 		this.setVisible(true);
+		
+		lives.setFont(new Font("Courier New", Font.BOLD, 22));
+		p1Scores.setFont(new Font("Courier New", Font.BOLD, 22));
+		p2Scores.setFont(new Font("Courier New", Font.BOLD, 22));
+		
 		timer.start();
 		backgroundMusic = this.getCurrentEngine().getSoundManager().play(1);
 	}
@@ -197,8 +203,8 @@ public class GamePanel extends JPanel   {
 			}
         	// Lives and Scores
         	//lives.setText("Lives = " + getCurrentRound().getLives());
-        	p1Scores.setText("P1 Scores = " + getCurrentRound().getPlayer(1).getScore());
-        	p2Scores.setText("P2 Scores = " + getCurrentRound().getPlayer(2).getScore());
+        	p1Scores.setText("     P1 Scores = " + getCurrentRound().getPlayer(1).getScore());
+        	p2Scores.setText("     P2 Scores = " + getCurrentRound().getPlayer(2).getScore());
         	//Weapon Change
         	/*
         	if(getCurrentRound().getPlayer(2).getScore() > 10)

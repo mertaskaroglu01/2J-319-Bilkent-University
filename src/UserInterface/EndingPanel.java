@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -100,5 +101,9 @@ public class EndingPanel extends JPanel {
 				e.printStackTrace();
 			}
     }
-
+	public String getName()
+	{
+		String name = JOptionPane.showInputDialog("Enter a team name");
+		return name;
+	}
 }
