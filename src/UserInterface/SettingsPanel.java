@@ -39,6 +39,12 @@ public class SettingsPanel extends JPanel {
 		btnSettingsBack.setOpaque(false);
 		btnSettingsBack.setContentAreaFilled(false);
 		btnSettingsBack.setBorderPainted(false);
+		on.setOpaque(false);
+		on.setContentAreaFilled(false);
+		on.setBorderPainted(false);
+		off.setOpaque(false);
+		off.setContentAreaFilled(false);
+		off.setBorderPainted(false);
 		
 		this.add(on);
 		this.add(off);

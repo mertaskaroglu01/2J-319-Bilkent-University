@@ -57,7 +57,18 @@ public class Menu {
 	/**
 	 * Launch the application.
 	 */
-	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu frame = new Menu();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
 	
 	/**
@@ -126,18 +137,7 @@ public class Menu {
 		
 	}
 	 
-	 public static void main(String[] args) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Menu frame = new Menu();
-						//frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
+	 
 	 	
 	 
 	 public static void endOfRound() {
@@ -284,11 +284,11 @@ public class Menu {
 	}
 	 
 	 public int[] sendMessages() {
-		 int[] messages = new int[3];
+		 int[] messages = new int[4];
 		 messages[0] = gamePanel.getCurrentRound().getPlayer(1).getScore();
 		 messages[1] = gamePanel.getCurrentRound().getPlayer(2).getScore();
 		 messages[2] = gamePanel.getCurrentEngine().getRemainingLives();
+		 messages[3] = gamePanel.getCurrentRound().getRoundNumber();
 		 return messages;
 	 }
-	 
 }

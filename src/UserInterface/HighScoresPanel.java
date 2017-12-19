@@ -32,7 +32,6 @@ public class HighScoresPanel extends JPanel {
 		
 		Scanner inFile = new Scanner(new FileReader("src/HighScores.txt"));
 		
-		
 	}
 	
 	public void paintComponent(Graphics g) {
